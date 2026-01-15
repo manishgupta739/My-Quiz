@@ -1,18 +1,12 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/>{
-  "short_name": "QuizApp",
-  "name": "The Ultimate Multi-Quiz App",
-  "description": "A collection of fun quizzes to test your knowledge.",
-  "icons": [
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
-    }
-  ],
-  "start_url": "index.html",
-  "display": "standalone",
+{
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
-  "orientation": "portrait"
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "manish942667.github",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "My Quiz",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "manish"
 }
