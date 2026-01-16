@@ -1,34 +1,59 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/>// Give your cache a name
-const cacheName = 'quiz-app-v1';
-
-// List EVERY file you want to work offline
+const cacheName = 'pharma-quiz-v1';
 const assets = [
   './',
   './index.html',
-  './A-quiz.html',
-  './B-quiz.html',
-  './C-quiz.html',
-  './style.css',
   './manifest.json',
-  './icon.png'
+  './sw.js',
+  './icon.png',
+  
+  // ORIGINAL PHARMACEUTICS TOPICS
+  './history of pharmacy.html',
+  './packaging material.html',
+  './tablets.html',
+  './capsule.html',
+  './size reduction.html',
+  
+  // ORIGINAL PHARMACOLOGY TOPICS
+  './route of administration.html',
+  './Pharmacokinetics & dynamic , AD, clinical trial.html',
+  './Cholinergic & Anticholinergic drugs.html',
+  './Adrenergic & Antiadrenergic drugs.html',
+  
+  // NEW SUBJECT TOPIC BLOCKS (A, B, C)
+  './cogno-a.html', './cogno-b.html', './cogno-c.html',
+  './hap-a.html', './hap-b.html', './hap-c.html',
+  './biochem-a.html', './biochem-b.html', './biochem-c.html',
+  './chem-a.html', './chem-b.html', './chem-c.html',
+  './community-a.html', './community-b.html', './community-c.html'
 ];
 
-// 1. Install Service Worker and save files to the "Cache"
+// 1. Install Event: Saves files to the phone
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(cacheName).then(cache => {
-      console.log('Saving files to cache...');
+      console.log('Caching assets...');
       return cache.addAll(assets);
     })
   );
 });
 
-// 2. Serve files from Cache when offline
+// 2. Fetch Event: Serves files from cache when offline
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Return the cached file, or try to get it from the internet
       return response || fetch(event.request);
+    })
+  );
+});
+
+// 3. Activate Event: Cleans up old caches
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(keys
+        .filter(key => key !== cacheName)
+        .map(key => caches.delete(key))
+      );
     })
   );
 });
