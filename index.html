@@ -244,84 +244,11 @@
     <div class="controls" id="controls">
         <button class="back-home" onclick="handleBack()">← Back</button>
     </div>
-
-    <script>
-        // Memory to track where we are
-        let viewHistory = ['home']; 
-
-        function navigateTo(targetId, subtitle, isChapter = false) {
-            // 1. Hide everything
-            document.getElementById('home-menu').style.display = 'none';
-            document.getElementById('subject-menu').style.display = 'none';
-            document.getElementById('mock-menu').style.display = 'none';
-            document.getElementById('pyp-menu').style.display = 'none';
-            document.getElementById('chapter-menu').style.display = 'none';
-
-            // 2. Show target
-            const target = document.getElementById(targetId);
-            target.style.display = isChapter ? 'block' : 'flex';
-            if(targetId === 'home-menu') target.style.display = 'grid';
-
-            // 3. Update Header & Controls
-            document.getElementById('dynamic-subtitle').innerText = subtitle;
-            document.getElementById('controls').style.display = (targetId === 'home-menu') ? 'none' : 'block';
-            
-            // 4. Update History
-            if (viewHistory[viewHistory.length - 1] !== targetId) {
-                viewHistory.push(targetId);
-            }
-            window.scrollTo(0,0);
-        }
-
-        function openChapters(subject) {
-            // Hide all groups first
-            document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
-            
-            // Show specific subject group
-            const group = document.getElementById(subject + '-list');
-            if(group) {
-                group.style.display = 'block';
-                navigateTo('chapter-menu', subject.toUpperCase() + ' CHAPTERS', true);
-            }
-        }
-
-        function handleBack() {
-            if (viewHistory.length > 1) {
-                // Remove current page from history
-                viewHistory.pop(); 
-                // Get the previous page
-                const previousPage = viewHistory[viewHistory.length - 1];
-                
-                // Reset history so it doesn't loop
-                viewHistory.pop(); 
-
-                // Route correctly
-                if (previousPage === 'home') {
-                    goHome();
-                } else if (previousPage === 'subject-menu') {
-                    navigateTo('subject-menu', 'Select Subject');
-                } else {
-                    goHome();
-                }
-            } else {
-                goHome();
-            }
-        }
-
-        function goHome() {
-            viewHistory = ['home'];
-            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-            document.getElementById('home-menu').style.display = 'grid';
-            document.getElementById('controls').style.display = 'none';
-            document.getElementById('dynamic-subtitle').innerText = "Elite Academic Dashboard";
-        }
-
-        // Initialize helper for main buttons
-        function showSection(id, title) {
-            navigateTo(id, title);
-        }
-    </script>
+    
+    <div class="controls" id="controls">
+        <button class="back-home" onclick="goHome()">← Back to Dashboard</button>
     </div>
+    
 <footer class="creator-tag">
         <p>created by 
             <a href="https://www.instagram.com/manishgupta_739" target="_blank" class="creator-link">
