@@ -3,217 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmacy Quiz Pro</title>
+    <title>Pharmacy Quiz Pro | Elite Dashboard</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        .creator-tag {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    pointer-events: none; /* Keeps it from blocking buttons */
-}
-
-.creator-tag p {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 10px; /* Small letters as requested */
-    letter-spacing: 2px; /* Adds a premium "brand" feel */
-    text-transform: lowercase; /* Forces small letters */
-    color: rgba(255, 255, 255, 0.5); /* Subtle white (elegant) */
-    margin: 0;
-}
-
-.creator-tag .name {
-    font-weight: 700;
-    color: #00d2ff; /* A nice cyan blue to make your name pop slightly */
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
-}
-        .creator-tag .name {
-    animation: glow 3s infinite ease-in-out;
-}
-
-@keyframes glow {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; text-shadow: 0 0 15px #00d2ff; }
-}
         :root {
-            --ceutics-color: #4CAF50;
-            --cology-color: #2196F3;
-            --cogno-color: #FF9800;
-            --hap-color: #E91E63;
-            --biochem-color: #9C27B0;
-            --chem-color: #607D8B;
-            --community-color: #00BCD4;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.95);
+            --primary: #6366f1;
+            --accent: #00d2ff;
+            --bg-dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            /* Subject Colors */
+            --ceutics: #4CAF50;
+            --cology: #2196F3;
+            --cogno: #FF9800;
+            --hap: #E91E63;
+            --biochem: #9C27B0;
+            --chem: #607D8B;
+            --community: #00BCD4;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg-gradient);
-            background-attachment: fixed;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-main);
+            margin: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            margin: 0;
-            color: #2d3436;
         }
 
-        header { text-align: center; margin-bottom: 30px; color: white; }
-        h1 { margin: 10px 0; }
-        
-        .menu-container {
-            width: 100%;
-            max-width: 600px;
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        h1 { font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
+
+        /* Main Pro Dashboard */
+        .dashboard-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
+            width: 90%;
+            max-width: 600px;
+            margin-top: 10px;
         }
 
-        .quiz-card {
-            background: var(--glass-bg);
-            padding: 20px;
+        .pro-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 30px 15px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pro-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent);
+        }
+
+        /* Generic List Styling */
+        .menu-grid {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 10px;
+            animation: slideUp 0.4s ease;
+        }
+
+        .item-card {
+            background: var(--glass);
+            padding: 18px;
             border-radius: 15px;
             text-decoration: none;
-            color: #2d3436;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
+            color: white;
+            font-weight: 500;
+            border-left: 6px solid var(--accent);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
         }
 
-        .quiz-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .item-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
 
-        /* Color Borders */
-        .border-ceutics { border-left: 8px solid var(--ceutics-color); }
-        .border-cology { border-left: 8px solid var(--cology-color); }
-        .border-cogno { border-left: 8px solid var(--cogno-color); }
-        .border-hap { border-left: 8px solid var(--hap-color); }
-        .border-biochem { border-left: 8px solid var(--biochem-color); }
-        .border-chem { border-left: 8px solid var(--chem-color); }
-        .border-community { border-left: 8px solid var(--community-color); }
+        /* Back Button */
+        .nav-controls {
+            margin: 30px 0;
+            display: none;
+        }
 
-        .topic-group { display: grid; gap: 12px; width: 100%; grid-column: span 2; }
-        
-        .back-btn {
-            margin-top: 30px;
+        .btn-back {
             background: white;
-            color: #764ba2;
+            color: #1e293b;
             border: none;
             padding: 12px 30px;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
         }
 
-        @media (max-width: 500px) { .menu-container { grid-template-columns: 1fr; } }
+        /* Subject specific borders */
+        .b-ceutics { border-color: var(--ceutics); }
+        .b-cology { border-color: var(--cology); }
+        .b-cogno { border-color: var(--cogno); }
+        .b-hap { border-color: var(--hap); }
+        .b-biochem { border-color: var(--biochem); }
+        .b-chem { border-color: var(--chem); }
+        .b-community { border-color: var(--community); }
+
+        .creator-tag {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+            color: rgba(255,255,255,0.4);
+        }
+        .creator-tag .name { color: var(--accent); font-weight: bold; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 480px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🎓 Pharmacy Learning Hub</h1>
-        <p>Select a subject to view your topic.</p>
+        <h1>🎓 Pharmacy Pro</h1>
+        <p id="sub-header" style="color: #94a3b8;">Welcome, Future Pharmacist</p>
     </header>
 
-    <div id="subject-menu" class="menu-container">
-        <div class="quiz-card border-ceutics" onclick="showTopics('ceutics')">🧪 Pharmaceutics</div>
-        <div class="quiz-card border-cology" onclick="showTopics('cology')">🧬 Pharmacology</div>
-        <div class="quiz-card border-cogno" onclick="showTopics('cogno')">🌿 Pharmacognosy</div>
-        <div class="quiz-card border-hap" onclick="showTopics('hap')">🫀 Anatomy & Physiology</div>
-        <div class="quiz-card border-biochem" onclick="showTopics('biochem')">⚗️ Biochemistry</div>
-        <div class="quiz-card border-chem" onclick="showTopics('chem')">⚗️ Inorganic Chem</div>
-        <div class="quiz-card border-community" onclick="showTopics('community')">🏥 Community Pharmacy</div>
+    <div id="main-dashboard" class="dashboard-container">
+        <div class="pro-card" onclick="openMenu('subject-menu', 'Practice by Subject')">
+            <div style="font-size: 2rem;">📖</div>
+            <h3 style="margin: 10px 0 0;">Practice Quiz</h3>
+        </div>
+        <div class="pro-card" onclick="openMenu('mock-menu', 'Exam Simulation')">
+            <div style="font-size: 2rem;">⏱️</div>
+            <h3 style="margin: 10px 0 0;">Mock Tests</h3>
+        </div>
     </div>
 
-    <div id="topic-menu" class="menu-container" style="display: none; grid-template-columns: 1fr;">
-        <h2 id="topic-title" style="text-align: center; color: white;">Chapters</h2>
-        
-          <div id="ceutics-list" class="topic-group"
-              style="display: none;">
-            <a href="history of pharmacy.html" class="quiz-card ceutics-border">History & Pharmacopeia</a>
-            <a href="packaging material.html" class="quiz-card ceutics-border">Packaging Material</a>
-            <a href="tablets.html" class="quiz-card ceutics-border">Tablets Technology</a>
-            <a href="capsule.html" class="quiz-card ceutics-border">Capsule Formulation</a>
-            <a href="size reduction.html" class="quiz-card ceutics-border">Size Reduction</a>
-            <a href="Size separation.html" class="quiz-card ceutics-border">Size Separation</a>   
-        </div>
-
-       <div id="cology-list" class="topic-group" style="display: none;">
-            <a href="route of administration.html" class="quiz-card cology-border">Routes of Administration</a>
-            <a href="Pharmacokinetics & dynamic , AD, clinical trial.html" class="quiz-card cology-border">Kinetics & Clinical Trials</a>
-            <a href="Cholinergic & Anticholinergic drugs.html" class="quiz-card cology-border">ANS: Cholinergic System</a>
-            <a href="Adrenergic & Antiadrenergic drugs.html" class="quiz-card cology-border">ANS: Adrenergic System</a>
-        </div>
-
-        <div id="cogno-list" class="topic-group" style="display: none;">
-            <a href="Definition, History & Scope of Pharmacognosy.html" class="quiz-card border-cogno">Definition, History & Scope of Pharmacognosy</a>
-            <a href="cogno-b.html" class="quiz-card border-cogno">Topic B</a>
-            <a href="cogno-c.html" class="quiz-card border-cogno">Topic C</a>
-        </div>
-
-        <div id="hap-list" class="topic-group" style="display: none;">
-            <a href="haemopoietic system.html" class="quiz-card border-hap">Haemopoietic system</a>
-            <a href="respiratory system.html" class="quiz-card border-hap">Respiratory system</a>
-            <a href="reproductive system.html" class="quiz-card border-hap">Reproductive system</a>
-        </div>
-
-        <div id="biochem-list" class="topic-group" style="display: none;">
-            <a href="biochem-a.html" class="quiz-card border-biochem">Topic A</a>
-            <a href="biochem-b.html" class="quiz-card border-biochem">Topic B</a>
-            <a href="biochem-c.html" class="quiz-card border-biochem">Topic C</a>
-        </div>
-
-        <div id="chem-list" class="topic-group" style="display: none;">
-            <a href="chem-a.html" class="quiz-card border-chem">Topic A</a>
-            <a href="chem-b.html" class="quiz-card border-chem">Topic B</a>
-            <a href="chem-c.html" class="quiz-card border-chem">Topic C</a>
-        </div>
-
-        <div id="community-list" class="topic-group" style="display: none;">
-            <a href="community-a.html" class="quiz-card border-community">Topic A</a>
-            <a href="community-b.html" class="quiz-card border-community">Topic B</a>
-            <a href="community-c.html" class="quiz-card border-community">Topic C</a>
-        </div>
-
-        <button class="back-btn" onclick="goBack()">← Back to Subjects</button>
+    <div id="subject-menu" class="menu-grid">
+        <div class="item-card b-ceutics" onclick="showChapters('ceutics')">🧪 Pharmaceutics <span>→</span></div>
+        <div class="item-card b-cology" onclick="showChapters('cology')">🧬 Pharmacology <span>→</span></div>
+        <div class="item-card b-cogno" onclick="showChapters('cogno')">🌿 Pharmacognosy <span>→</span></div>
+        <div class="item-card b-hap" onclick="showChapters('hap')">🫀 Anatomy & Physiology <span>→</span></div>
+        <div class="item-card b-biochem" onclick="showChapters('biochem')">⚗️ Biochemistry <span>→</span></div>
+        <div class="item-card b-chem" onclick="showChapters('chem')">⚗️ Inorganic Chem <span>→</span></div>
+        <div class="item-card b-community" onclick="showChapters('community')">🏥 Community Pharmacy <span>→</span></div>
     </div>
+
+    <div id="mock-menu" class="menu-grid">
+        <a href="mock-a.html" class="item-card" style="border-color: #fff;">📝 Mock Test Series A <span>Start</span></a>
+        <a href="mock-b.html" class="item-card" style="border-color: #fff;">📝 Mock Test Series B <span>Start</span></a>
+        <a href="mock-c.html" class="item-card" style="border-color: #fff;">📝 Mock Test Series C <span>Start</span></a>
+    </div>
+
+    <div id="chapter-menu" class="menu-grid">
+        <div id="ceutics-list" class="chapter-group" style="display:none;">
+            <a href="history of pharmacy.html" class="item-card b-ceutics">History & Pharmacopeia</a>
+            <a href="packaging material.html" class="item-card b-ceutics">Packaging Material</a>
+            <a href="tablets.html" class="item-card b-ceutics">Tablets Technology</a>
+            <a href="capsule.html" class="item-card b-ceutics">Capsule Formulation</a>
+            <a href="size reduction.html" class="item-card b-ceutics">Size Reduction</a>
+            <a href="Size separation.html" class="item-card b-ceutics">Size Separation</a>
+        </div>
+        <div id="cology-list" class="chapter-group" style="display:none;">
+            <a href="route of administration.html" class="item-card b-cology">Routes of Administration</a>
+            <a href="Pharmacokinetics & dynamic , AD, clinical trial.html" class="item-card b-cology">Kinetics & Clinical Trials</a>
+            <a href="Cholinergic & Anticholinergic drugs.html" class="item-card b-cology">ANS: Cholinergic System</a>
+            <a href="Adrenergic & Antiadrenergic drugs.html" class="item-card b-cology">ANS: Adrenergic System</a>
+        </div>
+        <div id="cogno-list" class="chapter-group" style="display:none;">
+            <a href="Definition, History & Scope of Pharmacognosy.html" class="item-card b-cogno">History & Scope</a>
+            <a href="cogno-b.html" class="item-card b-cogno">Topic B</a>
+        </div>
+        <div id="hap-list" class="chapter-group" style="display:none;">
+            <a href="haemopoietic system.html" class="item-card b-hap">Haemopoietic system</a>
+            <a href="respiratory system.html" class="item-card b-hap">Respiratory system</a>
+            <a href="reproductive system.html" class="item-card b-hap">Reproductive system</a>
+        </div>
+        <div id="biochem-list" class="chapter-group" style="display:none;">
+            <a href="biochem-a.html" class="item-card b-biochem">Biochemistry Topic A</a>
+        </div>
+        <div id="chem-list" class="chapter-group" style="display:none;">
+            <a href="chem-a.html" class="item-card b-chem">Inorganic Topic A</a>
+        </div>
+        <div id="community-list" class="chapter-group" style="display:none;">
+            <a href="community-a.html" class="item-card b-community">Community Topic A</a>
+        </div>
+    </div>
+
+    <div class="nav-controls" id="nav-controls">
+        <button class="btn-back" onclick="goHome()">← Back to Home</button>
+    </div>
+
+    <footer class="creator-tag">
+        <p>created by <span class="name">manish gupta</span></p>
+    </footer>
 
     <script>
-        function showTopics(subject) {
+        function openMenu(menuId, subtitle) {
+            document.getElementById('main-dashboard').style.display = 'none';
             document.getElementById('subject-menu').style.display = 'none';
-            document.getElementById('topic-menu').style.display = 'grid';
+            document.getElementById('mock-menu').style.display = 'none';
+            document.getElementById('chapter-menu').style.display = 'none';
             
-            const lists = ['ceutics-list', 'cology-list', 'cogno-list', 'hap-list', 'biochem-list', 'chem-list', 'community-list'];
-            lists.forEach(id => {
-                document.getElementById(id).style.display = 'none';
-            });
-            
-            document.getElementById(subject + '-list').style.display = 'grid';
-            document.getElementById('topic-title').innerText = subject.charAt(0).toUpperCase() + subject.slice(1) + " Chapters";
+            document.getElementById(menuId).style.display = 'grid';
+            document.getElementById('sub-header').innerText = subtitle;
+            document.getElementById('nav-controls').style.display = 'block';
             window.scrollTo(0,0);
         }
 
-        function goBack() {
-            document.getElementById('subject-menu').style.display = 'grid';
-            document.getElementById('topic-menu').style.display = 'none';
-            window.scrollTo(0,0);
+        function showChapters(subject) {
+            openMenu('chapter-menu', subject.charAt(0).toUpperCase() + subject.slice(1) + " Chapters");
+            document.querySelectorAll('.chapter-group').forEach(group => group.style.display = 'none');
+            document.getElementById(subject + '-list').style.display = 'block';
         }
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+        function goHome() {
+            document.getElementById('main-dashboard').style.display = 'grid';
+            document.getElementById('subject-menu').style.display = 'none';
+            document.getElementById('mock-menu').style.display = 'none';
+            document.getElementById('chapter-menu').style.display = 'none';
+            document.getElementById('nav-controls').style.display = 'none';
+            document.getElementById('sub-header').innerText = "Welcome, Future Pharmacist";
         }
     </script>
-    <footer class="creator-tag">
-    <p>Created by <span class="name">Manish Gupta</span></p>
-</footer>
 </body>
 </html>
