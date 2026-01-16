@@ -241,62 +241,84 @@
         <a href="pyp-b.html" class="list-item">COMING SOON <span>Open</span></a>
         <a href="pyp-c.html" class="list-item">COMING SOON <span>Open</span></a>
     </div>
-    
-   <div class="controls" id="controls">
-        <button class="back-home" id="back-button" onclick="handleBack()">← Back</button>
+    <div class="controls" id="controls">
+        <button class="back-home" onclick="handleBack()">← Back</button>
     </div>
 
     <script>
-        // Track the current view to know where to go back to
-        let currentViewState = 'home';
+        // Memory to track where we are
+        let viewHistory = ['home']; 
 
-        function showSection(id, title) {
+        function navigateTo(targetId, subtitle, isChapter = false) {
+            // 1. Hide everything
             document.getElementById('home-menu').style.display = 'none';
-            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+            document.getElementById('subject-menu').style.display = 'none';
+            document.getElementById('mock-menu').style.display = 'none';
+            document.getElementById('pyp-menu').style.display = 'none';
+            document.getElementById('chapter-menu').style.display = 'none';
+
+            // 2. Show target
+            const target = document.getElementById(targetId);
+            target.style.display = isChapter ? 'block' : 'flex';
+            if(targetId === 'home-menu') target.style.display = 'grid';
+
+            // 3. Update Header & Controls
+            document.getElementById('dynamic-subtitle').innerText = subtitle;
+            document.getElementById('controls').style.display = (targetId === 'home-menu') ? 'none' : 'block';
             
-            document.getElementById(id).style.display = 'flex';
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('dynamic-subtitle').innerText = title;
-            
-            // Update state
-            if (id === 'subject-menu') currentViewState = 'subjects';
-            else if (id === 'mock-menu' || id === 'pyp-menu') currentViewState = 'home';
-            
+            // 4. Update History
+            if (viewHistory[viewHistory.length - 1] !== targetId) {
+                viewHistory.push(targetId);
+            }
             window.scrollTo(0,0);
         }
 
         function openChapters(subject) {
-            // Hide the subject menu
-            document.getElementById('subject-menu').style.display = 'none';
-            
-            // Show the chapter menu
-            document.getElementById('chapter-menu').style.display = 'flex';
+            // Hide all groups first
             document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
             
-            const activeGroup = document.getElementById(subject + '-list');
-            if(activeGroup) activeGroup.style.display = 'block';
-            
-            document.getElementById('dynamic-subtitle').innerText = subject.toUpperCase() + ' CHAPTERS';
-            currentViewState = 'chapters'; // Update state to chapters
-            window.scrollTo(0,0);
+            // Show specific subject group
+            const group = document.getElementById(subject + '-list');
+            if(group) {
+                group.style.display = 'block';
+                navigateTo('chapter-menu', subject.toUpperCase() + ' CHAPTERS', true);
+            }
         }
 
         function handleBack() {
-            if (currentViewState === 'chapters') {
-                // If in chapters, go back to subject list
-                showSection('subject-menu', 'Select Subject');
+            if (viewHistory.length > 1) {
+                // Remove current page from history
+                viewHistory.pop(); 
+                // Get the previous page
+                const previousPage = viewHistory[viewHistory.length - 1];
+                
+                // Reset history so it doesn't loop
+                viewHistory.pop(); 
+
+                // Route correctly
+                if (previousPage === 'home') {
+                    goHome();
+                } else if (previousPage === 'subject-menu') {
+                    navigateTo('subject-menu', 'Select Subject');
+                } else {
+                    goHome();
+                }
             } else {
-                // If in subject list, mock, or pyp, go back to home
                 goHome();
             }
         }
 
         function goHome() {
+            viewHistory = ['home'];
             document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
             document.getElementById('home-menu').style.display = 'grid';
             document.getElementById('controls').style.display = 'none';
             document.getElementById('dynamic-subtitle').innerText = "Elite Academic Dashboard";
-            currentViewState = 'home';
+        }
+
+        // Initialize helper for main buttons
+        function showSection(id, title) {
+            navigateTo(id, title);
         }
     </script>
     </div>
