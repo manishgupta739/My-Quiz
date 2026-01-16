@@ -1,18 +1,11 @@
 {
-  "short_name": "PharmaQuiz",
-  "name": "Pharmacy Learning Hub Pro",
-  "description": "Master your Pharmacy curriculum with interactive quizzes.",
-  "icons": [
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
-    }
-  ],
-  "start_url": "index.html",
+  "background_color": "#ffffff",
+  "dir": "ltr",
   "display": "standalone",
-  "background_color": "#764ba2",
-  "theme_color": "#667eea",
-  "orientation": "portrait"
+  "name": "manish942667.github",
+  "orientation": "any",
+  "scope": "https://manishgupta739.github.io/My-Quiz/",
+  "short_name": "manish942667.github",
+  "start_url": "https://manishgupta739.github.io/My-Quiz/",
+  "theme_color": "#ffffff"
 }
