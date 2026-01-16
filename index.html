@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Pro | Elite Learning Systems</title>
     <style>
+        /* Bottom Nav Hover Effects */
+nav div:hover {
+    opacity: 1 !important;
+    transform: translateY(-3px);
+}
+
+nav div:active {
+    transform: scale(0.9);
+}
+
+/* Ensure the body doesn't scroll weirdly with the fixed bar */
+body {
+    padding-bottom: 20px;
+}
         /* Animation for the Daily Fact Popup */
 @keyframes fadeIn { 
     from { opacity: 0; transform: translateY(-20px); } 
@@ -444,11 +458,11 @@ function closeFact() {
         <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">LEARN</span>
     </div>
 
-    <div onclick="startFlashcards()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
-        <span style="font-size: 1.5rem;">🎴</span>
-        <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">FACTS</span>
+    <div onclick="navigateTo('mock-menu', 'Grand Mock Series')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
+        <span style="font-size: 1.5rem;">🏆</span>
+        <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">MOCK</span>
     </div>
-
+            
 </nav>
 <div style="height: 90px;"></div>
 </body>
