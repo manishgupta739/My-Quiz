@@ -231,19 +231,74 @@
     </div>
 
     <div id="mock-menu" class="sub-menu">
-        <a href="mock-a.html" class="list-item">Mock Test Series A <span>Start</span></a>
-        <a href="mock-b.html" class="list-item">Mock Test Series B <span>Start</span></a>
-        <a href="mock-c.html" class="list-item">Mock Test Series C <span>Start</span></a>
+        <a href="mock-a.html" class="list-item">COMING SOON <span>Start</span></a>
+        <a href="mock-b.html" class="list-item">COMING SOON <span>Start</span></a>
+        <a href="mock-c.html" class="list-item">COMING SOON <span>Start</span></a>
     </div>
 
     <div id="pyp-menu" class="sub-menu">
-        <a href="pyp-a.html" class="list-item">Previous Year Paper A <span>Open</span></a>
-        <a href="pyp-b.html" class="list-item">Previous Year Paper B <span>Open</span></a>
-        <a href="pyp-c.html" class="list-item">Previous Year Paper C <span>Open</span></a>
+        <a href="pyp-a.html" class="list-item">COMING SOON <span>Open</span></a>
+        <a href="pyp-b.html" class="list-item">COMING SOON <span>Open</span></a>
+        <a href="pyp-c.html" class="list-item">COMING SOON <span>Open</span></a>
+    </div>
+    
+   <div class="controls" id="controls">
+        <button class="back-home" id="back-button" onclick="handleBack()">← Back</button>
     </div>
 
-    <div class="controls" id="controls">
-        <button class="back-home" onclick="goHome()">← Back to Dashboard</button>
+    <script>
+        // Track the current view to know where to go back to
+        let currentViewState = 'home';
+
+        function showSection(id, title) {
+            document.getElementById('home-menu').style.display = 'none';
+            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+            
+            document.getElementById(id).style.display = 'flex';
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('dynamic-subtitle').innerText = title;
+            
+            // Update state
+            if (id === 'subject-menu') currentViewState = 'subjects';
+            else if (id === 'mock-menu' || id === 'pyp-menu') currentViewState = 'home';
+            
+            window.scrollTo(0,0);
+        }
+
+        function openChapters(subject) {
+            // Hide the subject menu
+            document.getElementById('subject-menu').style.display = 'none';
+            
+            // Show the chapter menu
+            document.getElementById('chapter-menu').style.display = 'flex';
+            document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
+            
+            const activeGroup = document.getElementById(subject + '-list');
+            if(activeGroup) activeGroup.style.display = 'block';
+            
+            document.getElementById('dynamic-subtitle').innerText = subject.toUpperCase() + ' CHAPTERS';
+            currentViewState = 'chapters'; // Update state to chapters
+            window.scrollTo(0,0);
+        }
+
+        function handleBack() {
+            if (currentViewState === 'chapters') {
+                // If in chapters, go back to subject list
+                showSection('subject-menu', 'Select Subject');
+            } else {
+                // If in subject list, mock, or pyp, go back to home
+                goHome();
+            }
+        }
+
+        function goHome() {
+            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+            document.getElementById('home-menu').style.display = 'grid';
+            document.getElementById('controls').style.display = 'none';
+            document.getElementById('dynamic-subtitle').innerText = "Elite Academic Dashboard";
+            currentViewState = 'home';
+        }
+    </script>
     </div>
 <footer class="creator-tag">
         <p>created by 
