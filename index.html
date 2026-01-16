@@ -120,8 +120,34 @@
 <body>
 
     <header>
-        <h1>🎓 Pharmacy Learning Hub</h1>
-        <p>Select a subject to view your chapters.</p>
+<div class="main-dashboard">
+    <div class="app-header">
+        <h1>Pharma Quiz Pro</h1>
+        <p>Master your curriculum, one question at a time.</p>
+    </div>
+
+    <div class="button-grid">
+        <button onclick="startQuiz('practice')" class="dash-btn practice">
+            <span class="icon">📖</span>
+            <span class="text">Practice Mode</span>
+        </button>
+
+        <button onclick="startQuiz('challenge')" class="dash-btn challenge">
+            <span class="icon">⚡</span>
+            <span class="text">Time Challenge</span>
+        </button>
+
+        <button onclick="showHighScores()" class="dash-btn scores">
+            <span class="icon">🏅</span>
+            <span class="text">My Achievements</span>
+        </button>
+
+        <button onclick="openCommunity()" class="dash-btn community">
+            <span class="icon">🤝</span>
+            <span class="text">Student Group</span>
+        </button>
+    </div>
+</div>
     </header>
 
     <div id="subject-menu" class="menu-container">
@@ -215,9 +241,5 @@
     <footer class="creator-tag">
     <p>Created by <span class="name">Manish Gupta</span></p>
 </footer>
-    <button onclick="shareApp()" class="dash-btn share">
-    <span class="icon">🚀</span>
-    <span class="text">Invite Friends</span>
-</button>
 </body>
 </html>
