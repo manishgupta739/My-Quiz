@@ -27,12 +27,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-bottom: 100px;
+            padding-bottom: 120px;
         }
 
         header { text-align: center; padding: 40px 20px 10px; width: 100%; box-sizing: border-box; }
         
-        /* --- GLOWING TITLE & LIVE EFFECT --- */
+        /* --- GLOWING TITLE --- */
         .logo-text {
             font-size: 2.5rem;
             font-weight: 900;
@@ -77,9 +77,9 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         /* --- SEARCH BAR --- */
@@ -89,7 +89,6 @@
             border: 1px solid rgba(251, 191, 36, 0.3); background: rgba(30, 41, 59, 0.5);
             color: white; outline: none; transition: 0.3s; box-sizing: border-box;
         }
-        #chapterSearch:focus { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(251, 191, 36, 0.2); }
 
         /* Dashboard Grid */
         .dashboard-main { display: grid; grid-template-columns: 1fr; gap: 15px; width: 90%; max-width: 500px; margin-top: 20px; }
@@ -107,6 +106,27 @@
             color: var(--text-primary); border-left: 4px solid var(--accent-blue); display: flex;
             justify-content: space-between; align-items: center; transition: 0.2s;
         }
+        
+        /* --- BOTTOM SIGNATURE --- */
+        .creator-tag {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .creator-name {
+            color: var(--accent-gold);
+            text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+            animation: textPulse 2s infinite ease-in-out;
+        }
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 15px rgba(251, 191, 36, 0.8); }
+        }
+
         .controls { margin: 30px 0; display: none; }
         .back-home { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 8px; cursor: pointer; }
 
@@ -146,15 +166,6 @@
                 <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Previous year collections</p>
             </div>
         </div>
-        <a href="https://instagram.com/your_id" style="text-decoration:none; color:inherit;">
-            <div class="main-btn" style="border-color: rgba(220, 39, 67, 0.3);">
-                <div class="icon-box" style="background: rgba(220, 39, 67, 0.1);">📸</div>
-                <div>
-                    <h3 style="margin:0">Official Instagram</h3>
-                    <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Follow for daily drug facts</p>
-                </div>
-            </div>
-        </a>
     </div>
 
     <div id="subject-menu" class="sub-menu">
@@ -208,6 +219,7 @@
 
     <div id="mock-menu" class="sub-menu">
         <a href="mock-a.html" class="list-item">MOCK TEST 1 <span>Start</span></a>
+        <a href="#" class="list-item">UPCOMING MOCK 2 <span>Locked</span></a>
     </div>
     
     <div id="pyp-menu" class="sub-menu">
@@ -218,21 +230,21 @@
         <button class="back-home" onclick="goHome()">← Back to Dashboard</button>
     </div>
 
+    <div class="creator-tag">
+        <span class="pulse-dot" style="display:inline-block; vertical-align:middle; margin-right:5px;"></span>
+        Created by <span class="creator-name">Manish Gupta</span>
+    </div>
+
     <nav style="position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-top: 1px solid rgba(251, 191, 36, 0.3); display: flex; justify-content: space-around; align-items: center; z-index: 9998; padding-bottom: 5px;">
         <div onclick="goHome()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
             <span style="font-size: 1.5rem;">🏠</span>
             <span style="font-size: 0.65rem; font-weight: 700; color: #fbbf24; margin-top: 4px; letter-spacing: 1px;">HOME</span>
         </div>
-        <div onclick="showSection('subject-menu', 'Select Subject')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.7;">
-            <span style="font-size: 1.5rem;">📚</span>
-            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">LEARN</span>
+        <div onclick="showSection('mock-menu', 'Grand Mock Series')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.7;">
+            <span style="font-size: 1.5rem;">🏆</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">MOCK TEST</span>
         </div>
-        <div onclick="startFlashcards()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
-            <span style="font-size: 1.5rem;">🎴</span>
-            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">FACTS</span>
-       </div>
-  </nav>
-
+    </nav>
 
     <script>
         function filterChapters() {
@@ -260,6 +272,7 @@
             document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
             document.getElementById(id).style.display = 'flex';
             document.getElementById('controls').style.display = 'block';
+            window.scrollTo(0,0);
         }
 
         function openChapters(subject) {
