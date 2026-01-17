@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rx Aspirant | Premium Pharmacy Prep</title>
+    
     <link rel="manifest" href="manifest.json">
-    <style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#020617">
         :root {
             --bg-dark: #020617;
             --card-bg: rgba(30, 41, 59, 0.7);
@@ -30,7 +33,11 @@
             align-items: center;
             padding-bottom: 120px;
         }
-
+/* --- APP INTERACTION SETTINGS --- */
+            overscroll-behavior-y: contain; /* Prevents browser pull-to-refresh */
+            -webkit-tap-highlight-color: transparent; /* Removes blue box on click */
+            user-select: none; /* Prevents accidental text selection */
+        }
         header { text-align: center; padding: 40px 20px 10px; width: 100%; box-sizing: border-box; }
         
         /* --- GLOWING TITLE --- */
