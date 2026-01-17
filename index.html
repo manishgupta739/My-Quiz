@@ -3,32 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharmacy Pro | Elite Learning Systems</title>
+    <title>Rx Aspirant | Competitive Pharmacy Prep</title>
     <style>
-        /* Bottom Nav Hover Effects */
-nav div:hover {
-    opacity: 1 !important;
-    transform: translateY(-3px);
-}
-
-nav div:active {
-    transform: scale(0.9);
-}
-
-/* Ensure the body doesn't scroll weirdly with the fixed bar */
-body {
-    padding-bottom: 20px;
-}
-        /* Animation for the Daily Fact Popup */
-@keyframes fadeIn { 
-    from { opacity: 0; transform: translateY(-20px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-/* Ensure the overlay covers the whole screen */
-#fact-overlay {
-    display: flex;
-}
         :root {
             --bg-dark: #020617;
             --card-bg: rgba(30, 41, 59, 0.7);
@@ -37,6 +13,7 @@ body {
             --text-primary: #f8fafc;
             --text-dim: #94a3b8;
         }
+
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             background-color: var(--bg-dark);
@@ -51,14 +28,35 @@ body {
             align-items: center;
         }
 
-        header { text-align: center; padding: 40px 20px 20px; }
+        header { text-align: center; padding: 40px 20px 10px; }
+        
         .logo-text {
-            font-size: 2.2rem;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
             margin: 0;
-            background: linear-gradient(to bottom right, #fff 30%, var(--accent-gold));
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+        }
+
+        .logo-text span {
+            background: linear-gradient(to bottom, #fff, #cbd5e1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        #music-status {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            cursor: pointer;
+            color: var(--accent-gold);
+            margin-top: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         /* Dashboard Grid */
@@ -86,7 +84,7 @@ body {
 
         .main-btn:hover {
             border-color: var(--accent-gold);
-            transform: scale(1.02);
+            transform: translateY(-3px);
             background: rgba(30, 41, 59, 0.9);
         }
 
@@ -132,45 +130,17 @@ body {
             font-weight: 600;
         }
 
-       /* Finalized Creator Footer */
-        .creator-tag {
-            margin-top: auto;
-            padding: 30px;
-            text-align: center;
-            font-size: 10px;
-            letter-spacing: 3px;
-            color: var(--text-dim);
-            text-transform: lowercase;
-        }
-
-        .creator-link {
-            text-decoration: none;
-            color: var(--accent-gold);
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s ease;
-        }
-
-        .creator-link:hover {
-            color: var(--insta-pink);
-            text-shadow: 0 0 12px rgba(225, 48, 108, 0.4);
-        }
-
-        .insta-icon {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="logo-text">PHARMACY PRO</h1>
-        <p id="dynamic-subtitle" style="color: var(--text-dim); font-size: 0.9rem;">Elite Academic Dashboard</p>
+        <h1 class="logo-text">Rx <span>ASPIRANT</span></h1>
+        <p id="dynamic-subtitle" style="color: var(--accent-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">
+            Competitive Exam Intelligence
+        </p>
+        <div onclick="toggleMusic()" id="music-status">🎵 FOCUS: ON</div>
     </header>
 
     <div id="home-menu" class="dashboard-main">
@@ -208,7 +178,6 @@ body {
     </div>
 
     <div id="chapter-menu" class="sub-menu">
-        
         <div id="ceutics-list" class="ch-group" style="display:none">
             <a href="history of pharmacy.html" class="list-item">History & Pharmacopeia</a>
             <a href="packaging material.html" class="list-item">Packaging Material</a>
@@ -255,113 +224,87 @@ body {
 
     <div id="mock-menu" class="sub-menu">
         <a href="mock-a.html" class="list-item">COMING SOON <span>Start</span></a>
-        <a href="mock-b.html" class="list-item">COMING SOON <span>Start</span></a>
-        <a href="mock-c.html" class="list-item">COMING SOON <span>Start</span></a>
     </div>
-
     <div id="pyp-menu" class="sub-menu">
         <a href="pyp-a.html" class="list-item">COMING SOON <span>Open</span></a>
-        <a href="pyp-b.html" class="list-item">COMING SOON <span>Open</span></a>
-        <a href="pyp-c.html" class="list-item">COMING SOON <span>Open</span></a>
     </div>
-    
+
     <div class="controls" id="controls">
-        <button class="back-home" onclick="handleBack()">← Back</button>
+        <button class="back-home" onclick="goHome()">← Back to Dashboard</button>
     </div>
 
+    <div id="fact-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2, 6, 23, 0.98); z-index:10000; display: flex; justify-content:center; align-items:center; backdrop-filter:blur(10px);">
+        <div style="background:rgba(30, 41, 59, 0.9); width:85%; max-width:400px; padding:35px; border-radius:24px; border:1px solid #fbbf24; text-align:center; box-shadow:0 0 40px rgba(251, 191, 36, 0.2);">
+            <div style="font-size:2.5rem; margin-bottom:15px;">💡</div>
+            <h2 style="color:#fbbf24; margin:0; font-size:1.3rem; letter-spacing:2px; font-weight:800;">DAILY INSIGHT</h2>
+            <div style="height:1px; background:linear-gradient(90deg, transparent, #fbbf24, transparent); margin:20px 0;"></div>
+            <p id="fact-text" style="color:#f8fafc; line-height:1.6; font-size:1rem; font-style: italic;">"Loading expert insight..."</p>
+            <button onclick="closeFact()" style="margin-top:25px; background:#fbbf24; color:#020617; border:none; padding:16px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; letter-spacing:1px;">ENTER DASHBOARD</button>
+        </div>
+    </div>
+
+    <nav style="position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-top: 1px solid rgba(251, 191, 36, 0.3); display: flex; justify-content: space-around; align-items: center; z-index: 9998; padding-bottom: 5px;">
+        <div onclick="goHome()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+            <span style="font-size: 1.5rem;">🏠</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fbbf24; margin-top: 4px; letter-spacing: 1px;">HOME</span>
+        </div>
+        <div onclick="showSection('subject-menu', 'Select Subject')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.7;">
+            <span style="font-size: 1.5rem;">📚</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">LEARN</span>
+        </div>
+        <div onclick="showSection('mock-menu', 'Grand Mock Series')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.7;">
+            <span style="font-size: 1.5rem;">🏆</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">MOCK</span>
+        </div>
+    </nav>
+
+    <audio id="bg-music" loop>
+        <source src="https://p.scdn.co/mp3-preview/6520379963e634731a5471699e173e13e2d6b38c?cid=774b75d563004772a4985a3646738c64" type="audio/mpeg">
+    </audio>
+
     <script>
-        // Memory to track where we are
-        let viewHistory = ['home']; 
+        const pharmaFacts = [
+            "Aspirin was originally derived from the bark of a willow tree.",
+            "The 'Rx' symbol is believed to be an abbreviation of the Latin word 'Recipe'.",
+            "Penicillin was discovered by accident from mold in 1928.",
+            "Pharmacists were originally called 'Apothecaries'.",
+            "Insulin was the first ever drug produced using biotechnology."
+        ];
 
-        function navigateTo(targetId, subtitle, isChapter = false) {
-            // 1. Hide everything
-            document.getElementById('home-menu').style.display = 'none';
-            document.getElementById('subject-menu').style.display = 'none';
-            document.getElementById('mock-menu').style.display = 'none';
-            document.getElementById('pyp-menu').style.display = 'none';
-            document.getElementById('chapter-menu').style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            const randomFact = pharmaFacts[Math.floor(Math.random() * pharmaFacts.length)];
+            document.getElementById('fact-text').innerText = randomFact;
+        });
 
-            // 2. Show target
-            const target = document.getElementById(targetId);
-            target.style.display = isChapter ? 'block' : 'flex';
-            if(targetId === 'home-menu') target.style.display = 'grid';
-
-            // 3. Update Header & Controls
-            document.getElementById('dynamic-subtitle').innerText = subtitle;
-            document.getElementById('controls').style.display = (targetId === 'home-menu') ? 'none' : 'block';
-            
-            // 4. Update History
-            if (viewHistory[viewHistory.length - 1] !== targetId) {
-                viewHistory.push(targetId);
-            }
-            window.scrollTo(0,0);
+        function closeFact() {
+            document.getElementById('fact-overlay').style.display = 'none';
+            const music = document.getElementById('bg-music');
+            music.volume = 0;
+            music.play().then(() => {
+                let fadeIn = setInterval(() => {
+                    if (music.volume < 0.2) { music.volume += 0.02; } 
+                    else { clearInterval(fadeIn); }
+                }, 100);
+            }).catch(e => console.log("Music blocked"));
         }
 
-        function openChapters(subject) {
-            // Hide all groups first
-            document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
-            
-            // Show specific subject group
-            const group = document.getElementById(subject + '-list');
-            if(group) {
-                group.style.display = 'block';
-                navigateTo('chapter-menu', subject.toUpperCase() + ' CHAPTERS', true);
-            }
-        }
-
-        function handleBack() {
-            if (viewHistory.length > 1) {
-                // Remove current page from history
-                viewHistory.pop(); 
-                // Get the previous page
-                const previousPage = viewHistory[viewHistory.length - 1];
-                
-                // Reset history so it doesn't loop
-                viewHistory.pop(); 
-
-                // Route correctly
-                if (previousPage === 'home') {
-                    goHome();
-                } else if (previousPage === 'subject-menu') {
-                    navigateTo('subject-menu', 'Select Subject');
-                } else {
-                    goHome();
-                }
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const status = document.getElementById('music-status');
+            if (music.paused) {
+                music.play();
+                status.innerText = "🎵 FOCUS: ON";
             } else {
-                goHome();
+                music.pause();
+                status.innerText = "🔇 FOCUS: OFF";
             }
         }
 
-        function goHome() {
-            viewHistory = ['home'];
-            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-            document.getElementById('home-menu').style.display = 'grid';
-            document.getElementById('controls').style.display = 'none';
-            document.getElementById('dynamic-subtitle').innerText = "Elite Academic Dashboard";
-        }
-
-        // Initialize helper for main buttons
-        function showSection(id, title) {
-            navigateTo(id, title);
-        }
-    </script>
-    
-<footer class="creator-tag">
-        <p>created by 
-            <a href="https://www.instagram.com/manishgupta_739" target="_blank" class="creator-link">
-                <svg class="insta-icon" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                manish gupta
-            </a>
-        </p>
-    </footer>
-
-    <script>
         function showSection(id, title) {
             document.getElementById('home-menu').style.display = 'none';
             document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-            document.getElementById(id).style.display = 'flex';
+            const target = document.getElementById(id);
+            target.style.display = 'flex';
             document.getElementById('controls').style.display = 'block';
             document.getElementById('dynamic-subtitle').innerText = title;
             window.scrollTo(0,0);
@@ -378,108 +321,8 @@ body {
             document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
             document.getElementById('home-menu').style.display = 'grid';
             document.getElementById('controls').style.display = 'none';
-            document.getElementById('dynamic-subtitle').innerText = "Elite Academic Dashboard";
+            document.getElementById('dynamic-subtitle').innerText = "Competitive Exam Intelligence";
         }
-        // --- LOGIC FOR DAILY FACT ---
-const pharmaFacts = [
-    "Aspirin was originally derived from the bark of a willow tree.",
-    "The first pharmacy school was established in Philadelphia in 1821.",
-    "Insulin was the first ever drug produced using biotechnology.",
-    "Penicillin was discovered by accident from mold in 1928.",
-    "Pharmacists were originally called 'Apothecaries'.",
-    "Digitalis, used for heart failure, comes from the Foxglove plant.",
-    "Morphine, the powerful painkiller, was the first alkaloid ever isolated from a plant (opium poppy) in 1804.",
-    "The 'Rx' symbol is believed to be an abbreviation of the Latin word 'Recipe', meaning 'Take thou'.",
-    "The world's oldest known prescriptions were written on clay tablets in Mesopotamia around 2100 B.C.",
-"Alexander Fleming discovered Penicillin in 1928, but it wasn't used to treat patients until 1941.",
-"The first official United States Pharmacopeia (USP) was published in 1820 by a group of 11 physicians.",
-"Smallpox is the only human infectious disease to have been completely eradicated by vaccination.",
-"Warfarin, a common blood thinner, was originally developed and marketed as a potent rat poison.",
-"The first synthetic drug, Acetanilide, was discovered by accident in 1886 when a chemist sent the wrong chemical to a doctor.",
-"Nitroglycerin is used both as a heart medication to treat angina and as a primary component in dynamite.",
-"Quinine, used to treat Malaria, was discovered in the bark of the Cinchona tree in South America.",
-"Digitalis, a medication for heart failure, is derived from the Foxglove plant (Digitalis purpurea).",
-"The placebo effect can actually trigger the brain to release its own natural painkillers, called endorphins.",
-"Before the 1950s, most pharmacists compounded nearly all medications by hand in the pharmacy.",
-"Liquid medicines are often flavored with cherry or citrus because these scents are best at masking bitter drug tastes.",
-"Coca-Cola was originally invented by a pharmacist named John Pemberton as a medicinal tonic.",
-"Taxol, a major breakthrough drug for treating cancer, was originally isolated from the bark of the Pacific Yew tree.",
-"The term 'Apothecary' comes from the Greek word 'apotheke', which means a storehouse or warehouse.",
-"Louis Pasteur developed the first vaccine for Rabies in 1885 by using a weakened version of the virus.",
-"Half of all modern medicines are derived from natural products, mostly plants and soil microorganisms.",
-"Pharmacokinetics is the study of what the body does to a drug (Absorption, Distribution, Metabolism, Excretion).",
-"Pharmacodynamics is the study of what the drug does to the body (the mechanism of action).",
-"The first commercial 'birth control' pill was approved by the FDA in 1960, changing modern medicine forever.",
-"Vitamins were named 'vital amines' because scientists originally thought all of them contained nitrogen.",
-"Edward Jenner created the first vaccine (for Smallpox) by using the milder Cowpox virus.",
-"The liver is the primary organ responsible for drug metabolism in the human body.",
-"The 'Double Blind' study is the gold standard for testing new drugs to prevent bias from doctors and patients.",
-"Generic drugs must have the same active ingredient, strength, and dosage form as the original brand-name drug.",
-"Grapefruit juice can dangerously increase the levels of certain drugs in the blood by blocking digestive enzymes.",
-"Penicillin is often called 'The Yellow Magic' because of its original color and life-saving properties.",
-"Agatha Christie, the famous mystery writer, worked as a pharmacy technician, which helped her write about poisons.",
-];
-
-// This runs as soon as the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    const randomFact = pharmaFacts[Math.floor(Math.random() * pharmaFacts.length)];
-    document.getElementById('fact-text').innerText = randomFact;
-    // Show the popup
-    document.getElementById('fact-overlay').style.display = 'flex';
-});
-
-function closeFact() {
-    const popup = document.getElementById('fact-overlay');
-    const music = document.getElementById('bg-music');
-
-    if (popup) {
-        // 1. Hide the popup
-        popup.style.display = 'none';
-        
-        // 2. Start the music at low volume (0.2 is best for study)
-        music.volume = 0.2; 
-        
-        // 3. Play the music
-        music.play().catch(error => {
-            console.log("Browser blocked auto-play. Music will start on next tap.");
-        });
-    }
-}
-
     </script>
-    <div id="fact-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2, 6, 23, 0.95); z-index:10000; justify-content:center; align-items:center; backdrop-filter:blur(10px); display: flex;">
-    <div style="background:rgba(30, 41, 59, 0.9); width:85%; max-width:400px; padding:35px; border-radius:24px; border:1px solid #fbbf24; text-align:center; box-shadow:0 0 40px rgba(251, 191, 36, 0.2); animation: fadeIn 0.6s ease;">
-        <div style="font-size:2.5rem; margin-bottom:15px;">💡</div>
-        <h2 style="color:#fbbf24; margin:0; font-size:1.3rem; letter-spacing:2px; font-weight:800;">DAILY PHARMA FACT</h2>
-        <div style="height:1px; background:linear-gradient(90deg, transparent, #fbbf24, transparent); margin:20px 0;"></div>
-        <p id="fact-text" style="color:#f8fafc; line-height:1.6; font-size:1rem; font-style: italic;">"Loading expert insight..."</p>
-        <button onclick="closeFact()" style="margin-top:25px; background:#fbbf24; color:#020617; border:none; padding:14px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; letter-spacing:1px;">ENTER DASHBOARD</button>
-    </div>
-        
-    </div>
-        <nav style="position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-top: 1px solid rgba(251, 191, 36, 0.3); display: flex; justify-content: space-around; align-items: center; z-index: 9998; padding-bottom: 5px;">
-    
-    <div onclick="goHome()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s;">
-        <span style="font-size: 1.5rem;">🏠</span>
-        <span style="font-size: 0.65rem; font-weight: 700; color: #fbbf24; margin-top: 4px; letter-spacing: 1px;">HOME</span>
-    </div>
-
-    <div onclick="navigateTo('subject-menu', 'Select Subject')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
-        <span style="font-size: 1.5rem;">📚</span>
-        <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">LEARN</span>
-    </div>
-
-    <div onclick="navigateTo('mock-menu', 'Grand Mock Series')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
-        <span style="font-size: 1.5rem;">🏆</span>
-        <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">MOCK</span>
-    </div>
-            
-</nav>
-<div style="height: 90px;"></div>
-    
-    <audio id="bg-music" loop>
-    <source src="https://p.scdn.co/mp3-preview/6520379963e634731a5471699e173e13e2d6b38c?cid=774b75d563004772a4985a3646738c64" type="audio/mpeg">
-    </audio>
-    
 </body>
 </html>
