@@ -27,139 +27,134 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-bottom: 160px; /* Space for creator and nav */
+            padding-bottom: 100px;
         }
 
-        /* --- GLOWING HEADER EFFECTS --- */
-        header { text-align: center; padding: 40px 20px 10px; width: 100%; }
+        header { text-align: center; padding: 40px 20px 10px; width: 100%; box-sizing: border-box; }
         
+        /* --- GLOWING TITLE & LIVE EFFECT --- */
         .logo-text {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 900;
             margin: 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: var(--accent-gold);
-            text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
             animation: titleGlow 3s infinite alternate;
+        }
+
+        .logo-text span {
+            background: linear-gradient(to bottom, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         @keyframes titleGlow {
             from { text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
-            to { text-shadow: 0 0 25px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.2); }
+            to { text-shadow: 0 0 25px rgba(251, 191, 36, 0.7); }
         }
 
-        .live-indicator {
+        .live-tag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(239, 68, 68, 0.15);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.7rem;
+            gap: 5px;
+            font-size: 0.65rem;
+            font-weight: 900;
             color: var(--live-red);
-            font-weight: 800;
-            margin-top: 10px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        .dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--live-red);
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--live-red);
             border-radius: 50%;
-            display: inline-block;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
         /* --- SEARCH BAR --- */
-        .search-container { width: 90%; max-width: 450px; margin: 25px auto; position: relative; }
+        .search-container { width: 90%; max-width: 450px; margin: 20px auto 10px; position: relative; }
         #chapterSearch {
-            width: 100%; padding: 16px 20px 16px 50px; border-radius: 15px;
-            border: 1px solid rgba(251, 191, 36, 0.2); background: rgba(30, 41, 59, 0.5);
-            color: white; outline: none; transition: 0.3s;
+            width: 100%; padding: 14px 20px 14px 45px; border-radius: 12px;
+            border: 1px solid rgba(251, 191, 36, 0.3); background: rgba(30, 41, 59, 0.5);
+            color: white; outline: none; transition: 0.3s; box-sizing: border-box;
         }
-        #chapterSearch:focus { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); }
+        #chapterSearch:focus { border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(251, 191, 36, 0.2); }
 
-        /* --- CREATOR SECTION --- */
-        .creator-card {
-            margin-top: 40px;
-            padding: 20px;
-            width: 85%;
-            max-width: 400px;
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-            backdrop-filter: blur(10px);
+        /* Dashboard Grid */
+        .dashboard-main { display: grid; grid-template-columns: 1fr; gap: 15px; width: 90%; max-width: 500px; margin-top: 20px; }
+        .main-btn {
+            background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 16px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 15px;
         }
+        .main-btn:hover { border-color: var(--accent-gold); transform: translateY(-3px); background: rgba(30, 41, 59, 0.9); }
+        .icon-box { font-size: 1.5rem; width: 50px; height: 50px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border-radius: 10px; }
 
-        .insta-btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
-            transition: 0.3s;
+        /* Menus */
+        .sub-menu { display: none; width: 95%; max-width: 500px; flex-direction: column; gap: 10px; animation: fadeIn 0.4s ease; }
+        .list-item {
+            background: var(--card-bg); padding: 16px 20px; border-radius: 12px; text-decoration: none;
+            color: var(--text-primary); border-left: 4px solid var(--accent-blue); display: flex;
+            justify-content: space-between; align-items: center; transition: 0.2s;
         }
-        .insta-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6); }
+        .controls { margin: 30px 0; display: none; }
+        .back-home { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 8px; cursor: pointer; }
 
-        /* UI Elements */
-        .dashboard-main { display: grid; gap: 15px; width: 90%; max-width: 500px; }
-        .main-btn { 
-            background: var(--card-bg); padding: 20px; border-radius: 16px; cursor: pointer; 
-            display: flex; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-        }
-        .main-btn:hover { border-color: var(--accent-gold); transform: translateY(-3px); }
-        .sub-menu { display: none; width: 95%; max-width: 500px; flex-direction: column; gap: 10px; }
-        .list-item { 
-            background: var(--card-bg); padding: 18px; border-radius: 12px; text-decoration: none; 
-            color: white; border-left: 4px solid var(--accent-blue); display: flex; justify-content: space-between;
-        }
-        .controls { margin: 20px 0; display: none; }
-        .back-home { background: none; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="live-indicator"><span class="dot"></span> LIVE SYSTEM ACTIVE</div>
+        <div class="live-tag"><span class="pulse-dot"></span> LIVE UPDATES</div>
         <h1 class="logo-text">Rx <span>ASPIRANT</span></h1>
         <div class="search-container">
-            <span style="position:absolute; left:20px; top:18px; opacity:0.5;">🔍</span>
-            <input type="text" id="chapterSearch" onkeyup="filterChapters()" placeholder="Search drug classes, chapters...">
+            <span style="position:absolute; left:15px; top:13px; opacity:0.5;">🔍</span>
+            <input type="text" id="chapterSearch" onkeyup="filterChapters()" placeholder="Search subjects or chapters...">
         </div>
     </header>
 
     <div id="home-menu" class="dashboard-main">
-        <div class="main-btn" onclick="showSection('subject-menu', 'Pharmacology & More')">
-            <div style="font-size:1.5rem">📚</div>
-            <div><h3 style="margin:0">Subject Quizzes</h3><p style="margin:0;font-size:0.7rem;color:var(--text-dim)">Chapter-wise specialized learning</p></div>
+        <div class="main-btn" onclick="showSection('subject-menu', 'Select Subject')">
+            <div class="icon-box">📚</div>
+            <div>
+                <h3 style="margin:0">Subject Quiz</h3>
+                <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Practice chapter-wise</p>
+            </div>
         </div>
-        <div class="main-btn" onclick="showSection('mock-menu', 'Grand Mock Tests')">
-            <div style="font-size:1.5rem">🏆</div>
-            <div><h3 style="margin:0">Mock Series</h3><p style="margin:0;font-size:0.7rem;color:var(--text-dim)">Simulate real exam environment</p></div>
+        <div class="main-btn" onclick="showSection('mock-menu', 'Grand Mock Series')">
+            <div class="icon-box">🏆</div>
+            <div>
+                <h3 style="margin:0">Mock Test Series</h3>
+                <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Time-bound exam practice</p>
+            </div>
         </div>
-        <div class="main-btn" onclick="showSection('pyp-menu', 'Previous Year Papers')">
-            <div style="font-size:1.5rem">📄</div>
-            <div><h3 style="margin:0">PYP Archives</h3><p style="margin:0;font-size:0.7rem;color:var(--text-dim)">Official papers from 2018-2025</p></div>
+        <div class="main-btn" onclick="showSection('pyp-menu', 'Previous Papers')">
+            <div class="icon-box">📄</div>
+            <div>
+                <h3 style="margin:0">PYP Archives</h3>
+                <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Previous year collections</p>
+            </div>
         </div>
-
-        <div class="creator-card">
-            <p style="margin:0; font-size:0.7rem; color:var(--accent-gold); font-weight:800; letter-spacing:1px;">STUDY PARTNER</p>
-            <h4 style="margin:5px 0; font-size:1.1rem;">Follow for Daily MCQ's</h4>
-            <a href="https://instagram.com/your_id" class="insta-btn">📸 INSTAGRAM @Rx_Aspirant</a>
-        </div>
+        <a href="https://instagram.com/your_id" style="text-decoration:none; color:inherit;">
+            <div class="main-btn" style="border-color: rgba(220, 39, 67, 0.3);">
+                <div class="icon-box" style="background: rgba(220, 39, 67, 0.1);">📸</div>
+                <div>
+                    <h3 style="margin:0">Official Instagram</h3>
+                    <p style="margin:4px 0 0; font-size:0.75rem; color:var(--text-dim)">Follow for daily drug facts</p>
+                </div>
+            </div>
+        </a>
     </div>
 
     <div id="subject-menu" class="sub-menu">
@@ -211,29 +206,51 @@
         </div>
     </div>
 
-    <div id="mock-menu" class="sub-menu"><a href="#" class="list-item">Full Length Mock 1 <span>Start</span></a></div>
-    <div id="pyp-menu" class="sub-menu"><a href="#" class="list-item">GPAT 2024 Paper <span>PDF</span></a></div>
+    <div id="mock-menu" class="sub-menu">
+        <a href="mock-a.html" class="list-item">MOCK TEST 1 <span>Start</span></a>
+    </div>
+    
+    <div id="pyp-menu" class="sub-menu">
+        <a href="pyp-a.html" class="list-item">PREVIOUS YEAR PAPERS <span>Open</span></a>
+    </div>
 
-    <div class="controls" id="controls"><button class="back-home" onclick="goHome()">← Back Home</button></div>
+    <div class="controls" id="controls">
+        <button class="back-home" onclick="goHome()">← Back to Dashboard</button>
+    </div>
 
-    <nav style="position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(251, 191, 36, 0.2); display: flex; justify-content: space-around; align-items: center; z-index: 999;">
-        <div onclick="goHome()" style="text-align:center; cursor:pointer;"><div style="font-size:1.4rem">🏠</div><div style="font-size:0.6rem; color:var(--accent-gold); font-weight:800;">HOME</div></div>
-        <div onclick="showSection('subject-menu', 'Subjects')" style="text-align:center; cursor:pointer;"><div style="font-size:1.4rem">📚</div><div style="font-size:0.6rem; font-weight:800;">LEARN</div></div>
-    </nav>
+    <nav style="position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-top: 1px solid rgba(251, 191, 36, 0.3); display: flex; justify-content: space-around; align-items: center; z-index: 9998; padding-bottom: 5px;">
+        <div onclick="goHome()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+            <span style="font-size: 1.5rem;">🏠</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fbbf24; margin-top: 4px; letter-spacing: 1px;">HOME</span>
+        </div>
+        <div onclick="showSection('subject-menu', 'Select Subject')" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.7;">
+            <span style="font-size: 1.5rem;">📚</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">LEARN</span>
+        </div>
+        <div onclick="startFlashcards()" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; opacity: 0.7;">
+            <span style="font-size: 1.5rem;">🎴</span>
+            <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px; letter-spacing: 1px;">FACTS</span>
+       </div>
+  </nav>
+
 
     <script>
         function filterChapters() {
-            let val = document.getElementById('chapterSearch').value.toLowerCase();
-            let home = document.getElementById('home-menu');
-            let chMenu = document.getElementById('chapter-menu');
-            if (val.length > 0) {
-                home.style.display = 'none';
+            let input = document.getElementById('chapterSearch').value.toLowerCase();
+            let homeMenu = document.getElementById('home-menu');
+            let chapterMenu = document.getElementById('chapter-menu');
+            let allChapters = document.querySelectorAll('.ch-group .list-item');
+            if (input.length > 0) {
+                homeMenu.style.display = 'none';
                 document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-                chMenu.style.display = 'flex';
+                chapterMenu.style.display = 'flex';
                 document.getElementById('controls').style.display = 'block';
-                document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'block');
-                document.querySelectorAll('.list-item').forEach(item => {
-                    item.style.display = item.innerText.toLowerCase().includes(val) ? 'flex' : 'none';
+                allChapters.forEach(item => {
+                    let text = item.textContent.toLowerCase();
+                    if (text.includes(input)) {
+                        item.parentElement.style.display = 'block';
+                        item.style.display = 'flex';
+                    } else { item.style.display = 'none'; }
                 });
             } else { goHome(); }
         }
@@ -248,8 +265,11 @@
         function openChapters(subject) {
             showSection('chapter-menu', '');
             document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
-            document.getElementById(subject + '-list').style.display = 'block';
-            document.getElementById(subject + '-list').querySelectorAll('.list-item').forEach(i => i.style.display = 'flex');
+            const group = document.getElementById(subject + '-list');
+            if(group) {
+                group.style.display = 'block';
+                group.querySelectorAll('.list-item').forEach(i => i.style.display = 'flex');
+            }
         }
 
         function goHome() {
