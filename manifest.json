@@ -1,7 +1,8 @@
 {
   "name": "Rx Aspirant Premium",
   "short_name": "Rx Aspirant",
-  "start_url": "/index.html",
+  "description": "Premium Pharmacy Prep and Mock Series",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#020617",
   "theme_color": "#020617",
@@ -9,14 +10,15 @@
   "icons": [
     {
       "src": "icon.png",
-      "sizes": "192x192",
+      "sizes": "561x561",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "sizes": "561x561",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
