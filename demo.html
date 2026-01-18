@@ -461,34 +461,408 @@ const qd = {
     tt: 1500, // Default time (25 mins)
     nm: 0.25, // Negative marking value
     m: 'exam', // Default mode
-    q: [
-        {
-            id: 0,
-            txt: "Which of the following is used as an opacifying agent in capsule shells?",
-            ref: "Reference: Pharmaceutics 101",
-            opts: ["Methyl paraben", "Sorbitol", "Titanium dioxide", "Gelatin"],
-            ci: 2, // Index of the correct answer (0=A, 1=B, 2=C, 3=D)
-            exp: "Titanium dioxide is used to make shells opaque to protect light-sensitive drugs."
-        },
-        {
-            id: 1,
-            txt: "What is the second question text here?",
-            ref: "Reference Book Name",
-            opts: ["Option A", "Option B", "Option C", "Option D"],
-            ci: 0, 
-            exp: "Detailed explanation for the second question goes here."
-        },
-        {
-            id: 2,
-            txt: "What is the third question text here?",
-            ref: "",
-            opts: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-            ci: 3,
-            exp: "Explanation for the third question."
-        }
-        // Keep adding questions here following the same format...
-    ]
-};
+q: [
+{
+id: 1,
+txt: "Which of the following is used as a plasticizer in the manufacturing of soft gelatin capsules?",
+ref: "RRB Pharmacist 2015",
+opts: ["Sorbitol", "Titanium dioxide", "Methyl paraben", "Iron oxide"],
+ci: 0,
+exp: "Plasticizers like Sorbitol and Glycerin are added to soft gelatin capsules to ensure flexibility and elasticity of the shell. Titanium dioxide is an opacifier, while parabens are preservatives."
+},
+{
+id: 2,
+txt: "The largest size of capsules available for human use is:",
+ref: "RRB Pharmacist 2019",
+opts: ["Size 5", "Size 0", "Size 000", "Size 1"],
+ci: 2,
+exp: "In capsule sizing, '000' is the largest size (approx 1.37 ml capacity) and '5' is the smallest size available for human use."
+},
+{
+id: 3,
+txt: "Type A gelatin is derived from acid-treated precursor and has an isoelectric point of approximately:",
+ref: "RRB Pharmacist 2012",
+opts: ["4.7", "7.0", "9.0", "5.5"],
+ci: 2,
+exp: "Type A gelatin (Pharmagel A) is produced by acid hydrolysis of pork skin and has an isoelectric point around pH 9.0. Type B is produced by alkaline hydrolysis."
+},
+{
+id: 4,
+txt: "The moisture content in hard gelatin capsule shells should ideally be between:",
+ref: "RRB Pharmacist 2015",
+opts: ["5% to 10%", "12% to 15%", "20% to 25%", "2% to 5%"],
+ci: 1,
+exp: "Hard gelatin capsules typically contain 12-15% moisture. If it drops below this, they become brittle; if it increases, they become soft and prone to microbial growth."
+},
+{
+id: 5,
+txt: "Which machine is used for the 'Bloom Strength' determination of gelatin?",
+ref: "RRB Pharmacist 2019",
+opts: ["Monsanto Tester", "Bloom Gelometer", "Erweka Apparatus", "Dissolution Apparatus"],
+ci: 1,
+exp: "Bloom strength, which measures the cohesive strength of the cross-linking in gelatin, is determined using a Bloom Gelometer."
+},
+{
+id: 6,
+txt: "Sealing of capsules by 'banding' involves the use of:",
+ref: "RRB Pharmacist 2015",
+opts: ["Acetone", "Gelatin solution", "Water", "Alcohol"],
+ci: 1,
+exp: "Banding is a process where a layer of gelatin is applied around the joint of the cap and body to provide a tamper-evident seal."
+},
+{
+id: 7,
+txt: "The opacifying agent used in capsule shells is:",
+ref: "RRB Pharmacist 2019",
+opts: ["Titanium dioxide", "Magnesium stearate", "Lactose", "Talcan"],
+ci: 0,
+exp: "Titanium dioxide is used to make the capsule shell opaque, protecting light-sensitive drugs from degradation."
+},
+{
+id: 8,
+txt: "Rotofil is a machine used for filling:",
+ref: "RRB Pharmacist 2012",
+opts: ["Powders", "Liquids", "Pellets", "Tablets"],
+ci: 2,
+exp: "Rotofil is specifically designed for the high-speed filling of pellets into hard gelatin capsule shells."
+},
+{
+id: 9,
+txt: "Hard gelatin capsules are also known as:",
+ref: "RRB Pharmacist 2015",
+opts: ["Dry filled capsules", "One-piece capsules", "Softgels", "Sustained release capsules"],
+ci: 0,
+exp: "Hard gelatin capsules consist of two parts (body and cap) and are primarily used for filling dry powders, hence called dry-filled capsules."
+},
+{
+id: 10,
+txt: "The shell of soft gelatin capsules may contain a preservative to prevent growth of:",
+ref: "RRB Pharmacist 2019",
+opts: ["Bacteria", "Fungi", "Viruses", "Protozoa"],
+ci: 1,
+exp: "Due to the high moisture content and presence of plasticizers, soft gelatin shells are susceptible to fungal growth, requiring preservatives like Methylparaben."
+},
+{
+id: 11,
+txt: "Bloom strength of gelatin used for capsules should be in the range of:",
+ref: "RRB Pharmacist 2015",
+opts: ["50 - 100 g", "100 - 150 g", "150 - 250 g", "300 - 400 g"],
+ci: 2,
+exp: "The pharmaceutical grade gelatin typically requires a Bloom strength between 150 to 250 grams for adequate shell integrity."
+},
+{
+id: 12,
+txt: "Which of the following is a 'Smallest' size of capsule?",
+ref: "RRB Pharmacist 2012",
+opts: ["Size 0", "Size 1", "Size 2", "Size 5"],
+ci: 3,
+exp: "The numbering system for capsules is inverse to size; therefore, 000 is the largest and 5 is the smallest."
+},
+{
+id: 13,
+txt: "The base of the gelatin is mainly composed of:",
+ref: "RRB Pharmacist 2015",
+opts: ["Collagen", "Starch", "Cellulose", "Chitin"],
+ci: 0,
+exp: "Gelatin is a heterogeneous product derived by the irreversible hydrolytic extraction of proteins from the collagen of animals."
+},
+{
+id: 14,
+txt: "Enteric coated capsules are designed to release the drug in:",
+ref: "RRB Pharmacist 2019",
+opts: ["Stomach", "Mouth", "Intestine", "Esophagus"],
+ci: 2,
+exp: "Enteric coatings are pH-sensitive polymers that resist gastric acid (pH 1-3) but dissolve in the higher pH environment of the small intestine."
+},
+{
+id: 15,
+txt: "Which method is used for the production of soft gelatin capsules?",
+ref: "RRB Pharmacist 2012",
+opts: ["Plate process", "Punch method", "Hand filling", "Dip coating"],
+ci: 0,
+exp: "Soft gelatin capsules are manufactured using the Plate process, Rotary Die process, or Reciprocating Die process."
+},
+{
+id: 16,
+txt: "The weight of a size '0' capsule is approximately:",
+ref: "RRB Pharmacist 2015",
+opts: ["100 mg", "500 mg", "300 mg", "700 mg"],
+ci: 1,
+exp: "A size 0 capsule generally holds about 500 mg of powder, depending on the bulk density of the material."
+},
+{
+id: 17,
+txt: "The moisture content of the gelatin capsule shell is determined by:",
+ref: "RRB Pharmacist 2019",
+opts: ["Toluene distillation", "Karl Fischer titration", "Loss on drying", "All of the above"],
+ci: 3,
+exp: "All these methods can be used to determine water content, though Loss on Drying (LOD) is the most standard for capsule shells."
+},
+{
+id: 18,
+txt: "Sugar coated capsules are intended to:",
+ref: "RRB Pharmacist 2012",
+opts: ["Mask taste", "Improve appearance", "Prevent oxidation", "All of the above"],
+ci: 3,
+exp: "Sugar coating provides a barrier for taste masking, improves aesthetic appeal, and can offer some protection against environmental factors."
+},
+{
+id: 19,
+txt: "HPMC capsules are an alternative to gelatin capsules for:",
+ref: "RRB Pharmacist 2015",
+opts: ["Vegetarians", "Better stability with moisture", "Avoiding animal sources", "All of the above"],
+ci: 3,
+exp: "Hydroxpropyl Methylcellulose (HPMC) capsules are plant-based (suitable for vegetarians) and have lower moisture content than gelatin."
+},
+{
+id: 20,
+txt: "The 'Rotary Die Process' was developed by:",
+ref: "RRB Pharmacist 2019",
+opts: ["Robert Scherer", "Colton", "Eli Lilly", "Parke Davis"],
+ci: 0,
+exp: "Robert P. Scherer developed the rotary die process in 1933, revolutionizing soft gelatin capsule production."
+},
+{
+id: 21,
+txt: "What is the capacity of '00' size capsule?",
+ref: "RRB Pharmacist 2015",
+opts: ["0.13 ml", "0.95 ml", "0.50 ml", "1.30 ml"],
+ci: 1,
+exp: "Size 00 has a volume capacity of approximately 0.91 to 0.95 ml."
+},
+{
+id: 22,
+txt: "Formaldehyde treatment of gelatin capsules results in:",
+ref: "RRB Pharmacist 2012",
+opts: ["Increased solubility", "Enteric properties", "Softening of shell", "Faster disintegration"],
+ci: 1,
+exp: "Formaldehyde treats the gelatin to cross-link the protein chains, making it insoluble in gastric juice but soluble in intestinal fluids (enteric effect)."
+},
+{
+id: 23,
+txt: "The 'Pin' used in the manufacture of capsule shells is made of:",
+ref: "RRB Pharmacist 2019",
+opts: ["Iron", "Stainless steel", "Plastic", "Manganese"],
+ci: 1,
+exp: "Molds or pins used in the dipping process are made of high-grade stainless steel to prevent corrosion and ensure uniformity."
+},
+{
+id: 24,
+txt: "The storage temperature for empty gelatin capsules should be:",
+ref: "RRB Pharmacist 2015",
+opts: ["0-5°C", "15-25°C", "40-50°C", "Below 0°C"],
+ci: 1,
+exp: "Empty capsules should be stored at controlled room temperature (15-25°C) to maintain the required moisture balance."
+},
+{
+id: 25,
+txt: "Which of the following is used as a lubricant in capsule filling?",
+ref: "RRB Pharmacist 2019",
+opts: ["Talc", "Magnesium stearate", "Glyceryl monostearate", "All of the above"],
+ci: 3,
+exp: "Lubricants like magnesium stearate and glidants like talc are added to ensure smooth flow of powder and prevent sticking to the machinery."
+},
+{
+id: 26,
+txt: "Uniformity of weight for capsules is as per:",
+ref: "RRB Pharmacist 2012",
+opts: ["IP", "BP", "USP", "All of the above"],
+ci: 3,
+exp: "All major pharmacopoeias (IP, BP, USP) provide standards and limits for the weight uniformity test of capsules."
+},
+{
+id: 27,
+txt: "Type B gelatin has an isoelectric point of:",
+ref: "RRB Pharmacist 2015",
+opts: ["9.0", "4.7", "7.0", "2.0"],
+ci: 1,
+exp: "Type B gelatin is produced by alkaline treatment of bones and has an isoelectric point of approximately 4.7 to 5.0."
+},
+{
+id: 28,
+txt: "Which of the following cannot be filled in soft gelatin capsules?",
+ref: "RRB Pharmacist 2019",
+opts: ["Vegetable oils", "Aromatic oils", "Water above 5%", "PEG"],
+ci: 2,
+exp: "Liquids with high water content or low molecular weight water-soluble organic compounds like alcohols cannot be filled as they dissolve the gelatin shell."
+},
+{
+id: 29,
+txt: "The disintegration time of hard gelatin capsules as per IP is:",
+ref: "RRB Pharmacist 2012",
+opts: ["15 minutes", "30 minutes", "60 minutes", "5 minutes"],
+ci: 1,
+exp: "According to the Indian Pharmacopoeia, the disintegration time for hard gelatin capsules is 30 minutes unless otherwise specified."
+},
+{
+id: 30,
+txt: "The 'Coni-Snap' capsule is designed to:",
+ref: "RRB Pharmacist 2015",
+opts: ["Increase solubility", "Prevent premature opening", "Improve taste", "Reduce cost"],
+ci: 1,
+exp: "Coni-Snap capsules have a tapered rim and locking grooves to prevent accidental opening or 'splitting' during high-speed filling."
+},
+{
+id: 31,
+txt: "Glycerin is used in soft gelatin capsules as a:",
+ref: "RRB Pharmacist 2019",
+opts: ["Preservative", "Vehicle", "Plasticizer", "Colorant"],
+ci: 2,
+exp: "Glycerin and Sorbitol are the most common plasticizers used to make the softgel shell pliable."
+},
+{
+id: 32,
+txt: "In the 'Punch Method' of filling capsules, the powder is placed on:",
+ref: "RRB Pharmacist 2012",
+opts: ["A piece of paper", "A glass plate", "A porcelain tile", "All of the above"],
+ci: 3,
+exp: "The punch method is a manual technique where the powder is spread on a clean surface (paper/tile/plate) to a height 1/3 the length of the capsule body."
+},
+{
+id: 33,
+txt: "Which test is NOT performed for capsules?",
+ref: "RRB Pharmacist 2015",
+opts: ["Disintegration", "Dissolution", "Friability", "Weight variation"],
+ci: 2,
+exp: "Friability is a test primarily for tablets. Capsules are tested for disintegration, dissolution, weight variation, and content uniformity."
+},
+{
+id: 34,
+txt: "Sorbitans are often added to gelatin as:",
+ref: "RRB Pharmacist 2019",
+opts: ["Wetting agents", "Plasticizers", "Opacifiers", "Glidants"],
+ci: 1,
+exp: "Sorbitans are occasionally used alongside glycerin/sorbitol as plasticizers to modify shell properties."
+},
+{
+id: 35,
+txt: "The viscosity of gelatin solution for capsule manufacturing should be:",
+ref: "RRB Pharmacist 2012",
+opts: ["5-10 millipoise", "25-45 millipoise", "100-150 millipoise", "500 millipoise"],
+ci: 1,
+exp: "Standard viscosity for capsule-grade gelatin is between 25 to 45 millipoise, ensuring proper film thickness during dipping."
+},
+{
+id: 36,
+txt: "The color of the capsule shell is achieved by:",
+ref: "RRB Pharmacist 2015",
+opts: ["Certified dyes", "Insoluble pigments", "Iron oxides", "All of the above"],
+ci: 3,
+exp: "A combination of water-soluble dyes and water-insoluble pigments (like iron oxides) is used for coloring capsule shells."
+},
+{
+id: 37,
+txt: "For a weight variation test of capsules, how many capsules are weighed individually?",
+ref: "RRB Pharmacist 2019",
+opts: ["10", "20", "50", "100"],
+ci: 1,
+exp: "As per pharmacopoeial standards (IP/BP/USP), 20 capsules are weighed individually to determine the average weight and deviations."
+},
+{
+id: 38,
+txt: "Hardness of capsules is measured by:",
+ref: "RRB Pharmacist 2012",
+opts: ["Strong-Cobb tester", "Hardness is not measured", "Pfizer tester", "Monsanto"],
+ci: 1,
+exp: "Unlike tablets, the 'hardness' of a capsule shell is not a standard quality control test; instead, shell flexibility and moisture content are monitored."
+},
+{
+id: 39,
+txt: "The sealing temperature in a Rotary Die process is approximately:",
+ref: "RRB Pharmacist 2015",
+opts: ["20-25°C", "37-40°C", "60-70°C", "100°C"],
+ci: 1,
+exp: "The ribbons of gelatin are sealed at a temperature slightly above room temperature (approx 37-40°C) as they pass through the die rollers."
+},
+{
+id: 40,
+txt: "A 'Cap-M-Quik' is a device for:",
+ref: "RRB Pharmacist 2019",
+opts: ["Large scale filling", "Extending shelf life", "Manual filling of capsules", "Measuring bloom strength"],
+ci: 2,
+exp: "Cap-M-Quik and Fult-fill are common manual/hand-operated capsule filling machines used for small-scale production."
+},
+{
+id: 41,
+txt: "What is the source of 'Type A' gelatin?",
+ref: "RRB Pharmacist 2012",
+opts: ["Bovine bone", "Pork skin", "Fish scale", "Vegetable source"],
+ci: 1,
+exp: "Type A gelatin is specifically derived from acid-processed pork skin."
+},
+{
+id: 42,
+txt: "The disintegration time for soft gelatin capsules is:",
+ref: "RRB Pharmacist 2015",
+opts: ["15 mins", "30 mins", "60 mins", "120 mins"],
+ci: 2,
+exp: "As per IP, the disintegration time for soft gelatin capsules is 60 minutes."
+},
+{
+id: 43,
+txt: "Which of the following determines the wall thickness of the capsule shell?",
+ref: "RRB Pharmacist 2019",
+opts: ["Dipping time", "Viscosity of gelatin solution", "Temperature of pins", "Speed of rotation"],
+ci: 1,
+exp: "The viscosity of the gelatin solution at the time of dipping is the primary factor controlling the thickness of the capsule shell wall."
+},
+{
+id: 44,
+txt: "The process of 'Polishing' capsules can be done using:",
+ref: "RRB Pharmacist 2012",
+opts: ["Pan polishing", "Cloth polishing", "Brushing", "All of the above"],
+ci: 3,
+exp: "Capsules are polished after filling to remove any adhering powder using various methods like salt polishing, pan polishing, or specialized brushing machines."
+},
+{
+id: 45,
+txt: "Which size capsule has a volume of 0.13 ml?",
+ref: "RRB Pharmacist 2015",
+opts: ["Size 0", "Size 3", "Size 5", "Size 00"],
+ci: 2,
+exp: "Size 5 is the smallest capsule and has a volume capacity of approximately 0.13 ml."
+},
+{
+id: 46,
+txt: "Gelatin is incompatible with:",
+ref: "RRB Pharmacist 2019",
+opts: ["Formaldehyde", "Tannic acid", "Strong acids", "All of the above"],
+ci: 3,
+exp: "Gelatin reacts with formaldehyde (tanning), tannic acid (precipitation), and is hydrolyzed by strong acids/alkalis."
+},
+{
+id: 47,
+txt: "Soft gelatin capsules are usually filled with:",
+ref: "RRB Pharmacist 2012",
+opts: ["Powders", "Liquids/Semi-solids", "Granules", "Tablets"],
+ci: 1,
+exp: "Softgels are primarily used to encapsulate liquids, suspensions, or semi-solid pastes."
+},
+{
+id: 48,
+txt: "The dissolution medium for enteric-coated capsules for the second stage is:",
+ref: "RRB Pharmacist 2015",
+opts: ["0.1N HCl", "Distilled water", "Phosphate buffer pH 6.8", "Acetone"],
+ci: 2,
+exp: "For enteric-coated dosage forms, the first stage uses acid (pH 1.2) and the second stage uses a buffer (pH 6.8) to simulate intestinal conditions."
+},
+{
+id: 49,
+txt: "Which part of the capsule is filled with the drug?",
+ref: "RRB Pharmacist 2019",
+opts: ["Cap", "Body", "Both", "None"],
+ci: 1,
+exp: "In hard gelatin capsules, the powder or pellets are filled into the 'Body', and the 'Cap' is then placed over it."
+},
+{
+id: 50,
+txt: "Large scale filling of capsules is done by:",
+ref: "RRB Pharmacist 2012",
+opts: ["Hand filling machine", "Hofliger Karg machine", "Punch method", "None of the above"],
+ci: 1,
+exp: "Hofliger Karg is a high-speed, automated industrial machine used for large-scale capsule filling."
+}
+]
 st={cq:0,a:Array(qd.q.length).fill(null),mk:Array(qd.q.length).fill(false),tr:qd.tt,ti:null,sb:false,rv:false,th:'light'};
 document.addEventListener('DOMContentLoaded',()=>{sms();pcc();lt()});
 function lt(){const t=localStorage.getItem('qt')||'light';st.th=t;document.documentElement.setAttribute('data-theme',t);uti()}
