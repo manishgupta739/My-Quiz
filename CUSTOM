@@ -1,0 +1,40 @@
+// REPLACE your old cs() with this:
+function cs() {
+    const u = st.a.filter(a => a === null).length;
+    const modal = document.getElementById('customConfirm');
+    const msg = document.getElementById('confirmMsg');
+    
+    // Set message without the browser "says..." header
+    msg.textContent = u > 0 
+        ? `You have ${u} unattempted question(s). Do you want to submit?` 
+        : "Are you sure you want to submit your quiz?";
+    
+    modal.style.display = 'flex'; // Show your custom popup
+}
+
+// ADD this new function
+function closeConfirm() {
+    document.getElementById('customConfirm').style.display = 'none';
+}
+
+// ADD this new function
+function finalSubmit() {
+    closeConfirm();
+    sbq(); // This triggers your existing scoring logic
+}
+
+ADD BELOW CODE ABOVE THE BODY ;
+
+<div id="customConfirm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(5px);">
+    <div class="mode-container" style="max-width:400px; padding:30px; text-align:center; background:var(--bg-white);">
+        <div class="mode-header-icon" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); width:60px; height:60px; font-size:30px; margin-bottom:15px;">
+            <i class="fas fa-question-circle"></i>
+        </div>
+        <h2 style="color:var(--text-dark); margin-bottom:10px;">Submit Quiz?</h2>
+        <p id="confirmMsg" style="color:var(--text-light); margin-bottom:25px; font-size:14px;"></p>
+        <div style="display:flex; gap:12px;">
+            <button onclick="closeConfirm()" class="nav-btn secondary" style="flex:1; margin:0; padding:12px;">Cancel</button>
+            <button onclick="finalSubmit()" class="nav-btn primary" style="flex:1; margin:0; padding:12px;">Submit</button>
+        </div>
+    </div>
+</div>
