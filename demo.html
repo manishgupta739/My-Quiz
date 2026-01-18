@@ -7,78 +7,69 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* --- PART 1 & 2: STYLES --- */
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* --- STYLES FROM PARTS 1, 2, & 3 --- */
 :root{--primary:#667eea;--primary-dark:#5568d3;--secondary:#764ba2;--success:#48bb78;--danger:#f5576c;--warning:#fbbf24;--info:#4facfe;--bg-light:#f7fafc;--bg-white:#fff;--text-dark:#1a202c;--text-light:#718096;--border:#e2e8f0}
 [data-theme="dark"]{--bg-light:#1a202c;--bg-white:#2d3748;--text-dark:#f7fafc;--text-light:#cbd5e0;--border:#4a5568}
-body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);min-height:100vh;overflow:hidden;user-select:none;-webkit-user-select:none;transition:background .3s}
-.scrollable::-webkit-scrollbar{width:6px}
-.scrollable::-webkit-scrollbar-track{background:transparent}
-.scrollable::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
-.protected-content{white-space:pre-wrap;word-wrap:break-word;word-break:break-word;line-height:1.6;user-select:none}
-#modeSelection{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;overflow-y:auto}
-.mode-container{background:#fff;border-radius:24px;padding:40px 30px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:ms .5s cubic-bezier(.34,1.56,.64,1)}
-@keyframes ms{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-.mode-header{text-align:center;margin-bottom:32px}
-.mode-header-icon{width:70px;height:70px;margin:0 auto 16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;box-shadow:0 8px 24px rgba(102,126,234,.3)}
-.mode-header h2{font-size:24px;font-weight:700;color:#1a202c;margin-bottom:8px}
-.mode-header p{font-size:14px;color:#718096;font-weight:400}
-.mode-cards{display:grid;gap:16px;margin-bottom:24px}
-.mode-card{background:#f7fafc;border:2px solid #e2e8f0;border-radius:16px;padding:20px;cursor:pointer;transition:all .3s;position:relative}
-.mode-card.selected{border-color:#667eea;background:#fff;box-shadow:0 8px 24px rgba(102,126,234,.2);transform:translateY(-2px)}
-.mode-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-right:16px;flex-shrink:0}
-.exam-mode .mode-icon{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff}
-.practice-mode .mode-icon{background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);color:#fff}
-.mode-info h3{font-size:17px;font-weight:700;color:#1a202c;margin-bottom:4px}
-.timer-input{width:100%;padding:14px 16px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;background:#fff;font-family:'Poppins',sans-serif}
-.start-btn{width:100%;padding:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
-.start-btn:disabled{opacity:.5;cursor:not-allowed;background:#cbd5e0}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Poppins',sans-serif;background:var(--bg-light);min-height:100vh;user-select:none}
 
-#quizContainer{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg-light);overflow:hidden}
-.quiz-header{position:fixed;top:0;left:0;right:0;background:var(--bg-white);box-shadow:0 2px 15px rgba(0,0,0,.08);z-index:100;padding:16px 20px}
+/* Mode Selection */
+#modeSelection{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.mode-container{background:#fff;border-radius:24px;padding:40px 30px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mode-card{background:#f7fafc;border:2px solid #e2e8f0;border-radius:16px;padding:20px;cursor:pointer;margin-bottom:16px;transition:0.3s}
+.mode-card.selected{border-color:var(--primary);background:#fff;box-shadow:0 8px 24px rgba(102,126,234,.2)}
+.start-btn{width:100%;padding:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:14px;font-weight:700;cursor:pointer}
+.start-btn:disabled{opacity:.5}
+
+/* Quiz Container */
+#quizContainer{display:none;height:100vh;position:relative}
+.quiz-header{background:var(--bg-white);padding:16px 20px;box-shadow:0 2px 15px rgba(0,0,0,.08);z-index:100;position:relative}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.timer-display{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:var(--primary);padding:8px 14px;background:rgba(102,126,234,.1);border-radius:12px}
-.progress-bar-container{height:6px;background:var(--border);border-radius:10px;overflow:hidden}
-.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary) 0%,var(--secondary) 100%);transition:width .3s}
-.question-section{position:fixed;top:140px;left:0;right:0;bottom:80px;overflow-y:auto;padding:20px}
-.question-card{background:var(--bg-white);border-radius:20px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.06);max-width:800px;margin:0 auto}
-.option-btn{width:100%;padding:16px 18px;background:var(--bg-light);border:3px solid var(--border);border-radius:14px;text-align:left;margin-bottom:12px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;transition:all .3s}
-.option-indicator{min-width:28px;height:28px;border-radius:50%;background:var(--bg-white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600}
-.option-btn.selected{border-color:var(--primary);background:rgba(102,126,234,.1)}
-.option-btn.correct{border-color:var(--success);background:rgba(72,187,120,.1)}
-.option-btn.incorrect{border-color:var(--danger);background:rgba(245,87,108,.1)}
-.explanation-box{background:rgba(251,191,36,.1);border-left:4px solid var(--warning);padding:16px;margin-top:20px;border-radius:12px}
+.timer-display{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:var(--primary);padding:8px 14px;background:rgba(102,126,234,0.1);border-radius:12px}
 
-.nav-controls{position:fixed;bottom:0;left:0;right:0;background:var(--bg-white);padding:16px 20px;display:flex;gap:12px;z-index:90;box-shadow:0 -2px 15px rgba(0,0,0,.08)}
-.nav-btn{flex:1;padding:14px;border:none;border-radius:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+/* Main Question Section - SCROLLABLE */
+.question-section{height:calc(100vh - 220px);overflow-y:auto;padding:20px;padding-bottom:100px;background:var(--bg-light)}
+.question-card{background:var(--bg-white);border-radius:20px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.06);max-width:800px;margin:0 auto}
+.question-number{display:inline-flex;padding:6px 14px;background:rgba(102,126,234,0.1);color:var(--primary);border-radius:20px;font-weight:700;margin-bottom:16px}
+.question-text{font-size:18px;font-weight:600;color:var(--text-dark);margin-bottom:24px;line-height:1.7}
+
+/* Options */
+.option-btn{width:100%;padding:16px 18px;background:var(--bg-light);border:3px solid var(--border);border-radius:14px;margin-bottom:12px;cursor:pointer;display:flex;gap:12px;transition:0.3s}
+.option-indicator{min-width:32px;height:32px;border-radius:50%;background:var(--bg-white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center}
+.option-btn.selected{background:rgba(102,126,234,0.1);border-color:var(--primary)}
+.option-btn.correct{background:rgba(72,187,120,0.1);border-color:var(--success)}
+.option-btn.incorrect{background:rgba(245,87,108,0.1);border-color:var(--danger)}
+
+/* Navigation */
+.nav-controls{position:fixed;bottom:0;left:0;right:0;background:var(--bg-white);padding:16px 20px;display:flex;gap:12px;box-shadow:0 -2px 15px rgba(0,0,0,0.08)}
+.nav-btn{flex:1;padding:14px;border:none;border-radius:12px;font-weight:600;cursor:pointer}
 .nav-btn.primary{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff}
 .nav-btn.secondary{background:var(--bg-light);color:var(--text-dark);border:2px solid var(--border)}
 
-.question-nav-toggle{position:fixed;bottom:100px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;border:none;border-radius:50%;font-size:22px;z-index:85;cursor:pointer}
-.question-nav-panel{position:fixed;bottom:0;left:0;right:0;background:var(--bg-white);border-radius:24px 24px 0 0;z-index:95;transform:translateY(100%);transition:transform .3s;padding:20px;max-height:70vh;overflow-y:auto}
+/* Question Navigator Panel */
+.question-nav-toggle{position:fixed;bottom:100px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;border-radius:50%;z-index:85;cursor:pointer;border:none}
+.question-nav-panel{position:fixed;bottom:0;left:0;right:0;background:var(--bg-white);padding:20px;border-radius:24px 24px 0 0;transform:translateY(100%);transition:0.3s;z-index:95;box-shadow:0 -4px 30px rgba(0,0,0,0.15)}
 .question-nav-panel.open{transform:translateY(0)}
 .question-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .question-nav-item{aspect-ratio:1;border:2px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer}
-.question-nav-item.current{border-color:var(--primary);color:var(--primary)}
+.question-nav-item.current{border-color:var(--primary);background:rgba(102,126,234,0.1)}
 .question-nav-item.answered{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;border:none}
 .question-nav-item.marked{background:var(--warning);color:#fff;border:none}
 
-/* Results Grid Styles */
-#resultsContainer{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg-light);padding:20px;overflow-y:auto;z-index:1000}
+/* Results */
+#resultsContainer{display:none;padding:20px;background:var(--bg-light);height:100vh;overflow-y:auto}
 .results-header{text-align:center;padding:40px 20px;background:var(--bg-white);border-radius:20px;margin-bottom:20px}
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;max-width:800px;margin:0 auto}
-.stat-card{background:var(--bg-white);padding:24px;border-radius:16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.06)}
-.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px}
-.stat-icon.correct{background:var(--success);color:#fff}
-.stat-icon.incorrect{background:var(--danger);color:#fff}
-.stat-icon.unattempted{background:#a0aec0;color:#fff}
-.stat-icon.negative{background:#ed8936;color:#fff}
+.results-score{font-size:52px;font-weight:800;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:800px;margin:0 auto 20px}
+.stat-card{background:var(--bg-white);padding:24px;border-radius:16px;text-align:center}
+.stat-value{font-size:32px;font-weight:700}
 
+/* Desktop Fixes */
 @media (min-width: 1024px) {
-    #quizContainer { display: grid; grid-template-columns: 1fr 320px; grid-template-rows: auto 1fr auto; height: 100vh; }
-    .question-section { position: static; grid-column: 1; grid-row: 2; overflow-y: auto; }
-    .question-nav-panel { position: static; grid-column: 2; grid-row: 2; transform: none; border-left: 3px solid var(--border); max-height: none; }
-    .nav-controls { position: static; grid-column: 1; grid-row: 3; }
+    #quizContainer { display: none; grid-template-columns: 1fr 320px; grid-template-rows: auto 1fr auto; }
+    .question-section { grid-column: 1; height: auto; position: relative; top: 0; bottom: 0; }
+    .question-nav-panel { position: static !important; grid-column: 2; grid-row: 2; transform: none !important; border-left: 3px solid var(--border); border-radius: 0; }
+    .nav-controls { grid-column: 1; position: static; }
     .question-nav-toggle { display: none; }
 }
 </style>
@@ -87,58 +78,33 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 
 <div id="modeSelection">
     <div class="mode-container">
-        <div class="mode-header">
-            <div class="mode-header-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h2>capsule</h2>
-            <p>Choose your preferred test mode</p>
-        </div>
+        <div class="mode-header"><h2>capsule</h2><p>Choose your test mode</p></div>
         <div class="mode-cards">
-            <div class="mode-card exam-mode" data-mode="exam">
-                <div class="mode-card-header">
-                    <div class="mode-icon"><i class="fas fa-file-alt"></i></div>
-                    <div class="mode-info"><h3>Exam Mode</h3><p>Complete all questions, results shown after submission</p></div>
-                </div>
-            </div>
-            <div class="mode-card practice-mode" data-mode="practice">
-                <div class="mode-card-header">
-                    <div class="mode-icon"><i class="fas fa-book-open"></i></div>
-                    <div class="mode-info"><h3>Practice Mode</h3><p>Instant feedback with detailed explanations</p></div>
-                </div>
-            </div>
+            <div class="mode-card exam-mode" data-mode="exam"><h3>Exam Mode</h3></div>
+            <div class="mode-card practice-mode" data-mode="practice"><h3>Practice Mode</h3></div>
         </div>
-        <div class="timer-config">
-            <label for="ct"><i class="fas fa-clock"></i> Custom Timer (minutes)</label>
-            <input type="number" id="ct" class="timer-input" placeholder="Default: 25 minutes">
-        </div>
-        <button class="start-btn" id="sb" disabled><i class="fas fa-play-circle"></i><span>Start Quiz</span></button>
+        <input type="number" id="ct" class="timer-input" placeholder="Minutes (Default: 25)">
+        <button class="start-btn" id="sb" disabled>Start Quiz</button>
     </div>
 </div>
 
 <div id="quizContainer">
     <div class="quiz-header">
         <div class="header-top">
-            <div class="quiz-title"><i class="fas fa-clipboard-list"></i><span class="quiz-title-text">capsule</span> <span class="mode-badge" id="mb"></span></div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="tt"><i class="fas fa-moon"></i></button>
-                <div class="timer-display" id="td"><i class="fas fa-clock"></i><span id="tt2">00:00</span></div>
-            </div>
-        </div>
-        <div class="header-progress">
-            <span id="pt">Question 1 of 1</span>
-            <span id="at">Attempted: 0/1</span>
+            <div class="quiz-title">capsule <span id="mb" class="mode-badge"></span></div>
+            <div class="timer-display" id="td"><i class="fas fa-clock"></i><span id="tt2">00:00</span></div>
         </div>
         <div class="progress-bar-container"><div class="progress-bar" id="pb"></div></div>
     </div>
-    <div class="question-section scrollable" id="qs"></div>
+    <div class="question-section" id="qs"></div>
     <div class="nav-controls">
-        <button class="nav-btn secondary" id="pv"><i class="fas fa-chevron-left"></i>Previous</button>
-        <button class="nav-btn secondary" id="mk"><i class="fas fa-bookmark"></i>Mark</button>
-        <button class="nav-btn primary" id="nx">Next<i class="fas fa-chevron-right"></i></button>
-        <button class="nav-btn primary" id="sm" style="display:none"><i class="fas fa-paper-plane"></i>Submit</button>
+        <button class="nav-btn secondary" id="pv">Previous</button>
+        <button class="nav-btn secondary" id="mk">Mark</button>
+        <button class="nav-btn primary" id="nx">Next</button>
+        <button class="nav-btn primary" id="sm" style="display:none">Submit</button>
     </div>
     <button class="question-nav-toggle" id="nt"><i class="fas fa-th"></i></button>
     <div class="question-nav-panel" id="np">
-        <div class="nav-panel-header"><h3 class="nav-panel-title">Navigator</h3><button class="nav-close-btn" id="nc"><i class="fas fa-times"></i></button></div>
         <div class="question-grid" id="qg"></div>
     </div>
 </div>
@@ -146,187 +112,139 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <div id="resultsContainer">
     <div class="results-header">
         <div class="results-icon" id="ri"></div>
-        <h2 class="results-title" id="rt"></h2>
+        <h2 id="rt"></h2>
         <div class="results-score" id="rs"></div>
         <div class="results-percentage" id="rp"></div>
     </div>
     <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon correct"><i class="fas fa-check"></i></div><div class="stat-value" id="cc">0</div><div class="stat-label">Correct</div></div>
-        <div class="stat-card"><div class="stat-icon incorrect"><i class="fas fa-times"></i></div><div class="stat-value" id="ic">0</div><div class="stat-label">Incorrect</div></div>
-        <div class="stat-card"><div class="stat-icon unattempted"><i class="fas fa-minus"></i></div><div class="stat-value" id="uc">0</div><div class="stat-label">Unattempted</div></div>
-        <div class="stat-card"><div class="stat-icon negative"><i class="fas fa-exclamation-triangle"></i></div><div class="stat-value" id="nm">0</div><div class="stat-label">Negative Marks</div></div>
+        <div class="stat-card"><div class="stat-value" id="cc">0</div><div>Correct</div></div>
+        <div class="stat-card"><div class="stat-value" id="ic">0</div><div>Incorrect</div></div>
+        <div class="stat-card"><div class="stat-value" id="uc">0</div><div>Unattempted</div></div>
+        <div class="stat-card"><div class="stat-value" id="nm">0</div><div>Negative</div></div>
     </div>
-    <div class="action-buttons" style="display:grid; gap:12px; max-width:800px; margin:0 auto;">
-        <button class="nav-btn primary" id="rb">Review Answers</button>
-        <button class="nav-btn secondary" id="rsb">Restart Quiz</button>
-    </div>
+    <button class="nav-btn primary" id="rb" style="max-width:400px; margin: 0 auto; display: block;">Review Answers</button>
 </div>
 
-<div id="customConfirm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(5px);">
-    <div class="mode-container" style="max-width:400px; padding:30px; text-align:center;">
-        <h2 style="margin-bottom:10px;">Submit Quiz?</h2>
-        <p id="confirmMsg" style="margin-bottom:25px; color:var(--text-light);"></p>
-        <div style="display:flex; gap:12px;">
-            <button onclick="closeConfirm()" class="nav-btn secondary" style="flex:1;">Cancel</button>
-            <button onclick="finalSubmit()" class="nav-btn primary" style="flex:1;">Submit</button>
-        </div>
+<div id="customConfirm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
+    <div class="mode-container" style="text-align:center;">
+        <h2>Submit Quiz?</h2>
+        <p id="confirmMsg" style="margin:20px 0;"></p>
+        <button onclick="finalSubmit()" class="nav-btn primary">Submit</button>
+        <button onclick="closeConfirm()" class="nav-btn secondary">Cancel</button>
     </div>
 </div>
 
 <script>
-// --- DATA ---
 const qd = {
-    tt: 1500,
-    nm: 0.25,
-    m: 'exam',
-    q: [
-        {id:0, txt:"Which of the following is used as an opacifying agent in capsule shells?", ref:"", opts:["Methyl paraben", "Sorbitol", "Titanium dioxide", "Gelatin"], ci:2, exp:"Titanium dioxide is used to make shells opaque."}
-    ]
+    tt: 1500, nm: 0.25,
+    q: [{id:0, txt:"Which of the following is used as an opacifying agent in capsule shells?", opts:["Methyl paraben", "Sorbitol", "Titanium dioxide", "Gelatin"], ci:2, exp:"Titanium dioxide makes shells opaque."}]
 };
 
-// --- STATE ---
-let st = {cq:0, a:Array(qd.q.length).fill(null), mk:Array(qd.q.length).fill(false), tr:qd.tt, ti:null, sb:false, rv:false, th:'light'};
+let st = {cq:0, a:Array(qd.q.length).fill(null), mk:Array(qd.q.length).fill(false), tr:qd.tt, ti:null, sb:false};
 
-// --- INIT ---
-document.addEventListener('DOMContentLoaded', () => { sms(); sn(); });
-
-function sms() {
-    const mc = document.querySelectorAll('.mode-card'), sb = document.getElementById('sb');
-    mc.forEach(c => {
-        c.addEventListener('click', () => {
-            mc.forEach(x => x.classList.remove('selected'));
-            c.classList.add('selected');
-            qd.m = c.dataset.mode;
-            sb.disabled = false;
-        });
-    });
-    sb.addEventListener('click', sq);
-}
-
-function sq() {
-    const ct = document.getElementById('ct'), ctv = parseInt(ct.value);
-    if(ctv && ctv > 0) { st.tr = ctv * 60; qd.tt = ctv * 60; }
+document.getElementById('sb').onclick = () => {
+    const val = document.getElementById('ct').value;
+    if(val) st.tr = val * 60;
     document.getElementById('modeSelection').style.display = 'none';
     document.getElementById('quizContainer').style.display = (window.innerWidth >= 1024) ? 'grid' : 'block';
-    document.getElementById('mb').textContent = qd.m;
-    document.getElementById('mb').className = 'mode-badge ' + qd.m;
-    iq();
-}
+    startQuiz();
+};
 
-function iq() { rq(0); rqg(); stt(); }
+document.querySelectorAll('.mode-card').forEach(card => {
+    card.onclick = () => {
+        document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        qd.m = card.dataset.mode;
+        document.getElementById('sb').disabled = false;
+    }
+});
 
-function stt() {
-    utd();
+function startQuiz() {
+    rq(0); rqg();
     st.ti = setInterval(() => {
-        st.tr--; utd();
-        if(st.tr <= 0) { clearInterval(st.ti); sbq(); }
+        st.tr--;
+        let m = Math.floor(st.tr/60), s = st.tr%60;
+        document.getElementById('tt2').textContent = `${m}:${s < 10 ? '0'+s : s}`;
+        if(st.tr <= 0) sbq();
     }, 1000);
 }
 
-function utd() {
-    const m = Math.floor(st.tr/60), s = st.tr%60;
-    document.getElementById('tt2').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-
 function rq(i) {
-    st.cq = i; const q = qd.q[i], qs = document.getElementById('qs');
-    let h = `<div class="question-card"><div class="question-number">Question ${i+1} of ${qd.q.length}</div><div class="question-text">${q.txt}</div><div class="options-container">`;
+    st.cq = i; const q = qd.q[i];
+    let h = `<div class="question-card"><div class="question-number">Question ${i+1}</div><div class="question-text">${q.txt}</div>`;
     q.opts.forEach((o, x) => {
-        let bc = 'option-btn', ic = String.fromCharCode(65+x);
-        const isSel = st.a[i] === x, shAns = (qd.m === 'practice' && st.a[i] !== null) || st.sb;
-        if(isSel) bc += ' selected';
-        if(shAns) {
-            bc += ' disabled';
-            if(x === q.ci) { bc += ' correct'; ic = '✔'; }
-            else if(isSel) { bc += ' incorrect'; ic = '✖'; }
+        let cls = 'option-btn';
+        if(st.a[i] === x) cls += ' selected';
+        if(st.sb || (qd.m === 'practice' && st.a[i] !== null)) {
+            if(x === q.ci) cls += ' correct';
+            else if(st.a[i] === x) cls += ' incorrect';
         }
-        h += `<button class="${bc}" onclick="so(${x})"><div class="option-indicator">${ic}</div><div class="option-text">${o}</div></button>`;
+        h += `<button class="${cls}" onclick="so(${x})"><div class="option-indicator">${String.fromCharCode(65+x)}</div>${o}</button>`;
     });
-    if((qd.m === 'practice' && st.a[i] !== null) || st.sb) h += `<div class="explanation-box"><strong>Explanation:</strong><p>${q.exp}</p></div>`;
-    h += `</div>`;
-    qs.innerHTML = h; up(); unb(); uqg();
+    if(st.sb || (qd.m === 'practice' && st.a[i] !== null)) h += `<div class="explanation-box">${q.exp}</div>`;
+    document.getElementById('qs').innerHTML = h;
+    unb(); uqg();
 }
 
-function so(oi) { if(st.sb) return; st.a[st.cq] = (st.a[st.cq] === oi) ? null : oi; rq(st.cq); }
-
-function sn() {
-    document.getElementById('pv').onclick = () => { if(st.cq > 0) rq(st.cq-1); };
-    document.getElementById('nx').onclick = () => { if(st.cq < qd.q.length-1) rq(st.cq+1); };
-    document.getElementById('mk').onclick = () => { st.mk[st.cq] = !st.mk[st.cq]; uqg(); unb(); };
-    document.getElementById('sm').onclick = cs;
-    document.getElementById('nt').onclick = tnp;
-    document.getElementById('nc').onclick = tnp;
-    document.getElementById('rsb').onclick = () => location.reload();
-    document.getElementById('rb').onclick = ra;
-}
+function so(x) { if(st.sb) return; st.a[st.cq] = x; rq(st.cq); }
 
 function rqg() {
     const g = document.getElementById('qg'); g.innerHTML = '';
     qd.q.forEach((_, i) => {
-        const it = document.createElement('div'); it.className = 'question-nav-item';
-        it.textContent = i+1; it.onclick = () => { rq(i); if(window.innerWidth < 1024) tnp(); };
-        g.appendChild(it);
+        const d = document.createElement('div'); d.className = 'question-nav-item';
+        d.textContent = i+1; d.onclick = () => { rq(i); if(window.innerWidth < 1024) tnp(); };
+        g.appendChild(d);
     });
 }
 
 function uqg() {
-    const its = document.querySelectorAll('.question-nav-item');
-    its.forEach((it, i) => {
+    const items = document.querySelectorAll('.question-nav-item');
+    items.forEach((it, i) => {
         it.className = 'question-nav-item';
         if(i === st.cq) it.classList.add('current');
-        if(st.sb) {
-            if(st.a[i] === qd.q[i].ci) it.classList.add('answered');
-            else if(st.a[i] !== null) it.classList.add('marked');
-        } else {
-            if(st.a[i] !== null) it.classList.add('answered');
-            if(st.mk[i]) it.classList.add('marked');
-        }
+        if(st.a[i] !== null) it.classList.add('answered');
+        if(st.mk[i]) it.classList.add('marked');
     });
 }
 
 function unb() {
     document.getElementById('pv').disabled = st.cq === 0;
-    document.getElementById('nx').style.display = (st.cq === qd.q.length-1) ? 'none' : 'flex';
-    document.getElementById('sm').style.display = (st.cq === qd.q.length-1) ? 'flex' : 'none';
-    document.getElementById('mk').innerHTML = st.mk[st.cq] ? 'Unmark' : 'Mark';
+    document.getElementById('nx').style.display = (st.cq === qd.q.length-1) ? 'none' : 'block';
+    document.getElementById('sm').style.display = (st.cq === qd.q.length-1) ? 'block' : 'none';
 }
 
-function up() {
-    const at = st.a.filter(a => a !== null).length;
-    document.getElementById('pt').textContent = `Question ${st.cq+1} of ${qd.q.length}`;
-    document.getElementById('at').textContent = `Attempted: ${at}/${qd.q.length}`;
-    document.getElementById('pb').style.width = ((st.cq+1)/qd.q.length)*100 + '%';
-}
-
+document.getElementById('nx').onclick = () => rq(st.cq+1);
+document.getElementById('pv').onclick = () => rq(st.cq-1);
+document.getElementById('mk').onclick = () => { st.mk[st.cq] = !st.mk[st.cq]; uqg(); };
+document.getElementById('nt').onclick = tnp;
 function tnp() { document.getElementById('np').classList.toggle('open'); }
-function cs() {
-    const u = st.a.filter(a => a === null).length;
-    document.getElementById('confirmMsg').textContent = u > 0 ? `You have ${u} unattempted questions.` : "Ready to submit?";
+
+document.getElementById('sm').onclick = () => {
+    document.getElementById('confirmMsg').textContent = `Questions answered: ${st.a.filter(x => x !== null).length}/${qd.q.length}`;
     document.getElementById('customConfirm').style.display = 'flex';
-}
+};
 function closeConfirm() { document.getElementById('customConfirm').style.display = 'none'; }
 function finalSubmit() { closeConfirm(); sbq(); }
 
 function sbq() {
     clearInterval(st.ti); st.sb = true;
-    let c=0, ic=0, u=0, nm=0;
-    st.a.forEach((a, i) => {
-        if(a === null) u++;
-        else if(a === qd.q[i].ci) c++;
-        else { ic++; nm += qd.nm; }
+    let c=0, ic=0, u=0;
+    st.a.forEach((ans, i) => {
+        if(ans === null) u++;
+        else if(ans === qd.q[i].ci) c++;
+        else ic++;
     });
-    const ts = c - nm, pc = (ts/qd.q.length)*100;
     document.getElementById('quizContainer').style.display = 'none';
     document.getElementById('resultsContainer').style.display = 'block';
-    document.getElementById('rs').textContent = ts.toFixed(2) + ' / ' + qd.q.length;
-    document.getElementById('rp').textContent = pc.toFixed(1) + '%';
-    document.getElementById('cc').textContent = c; document.getElementById('ic').textContent = ic; 
-    document.getElementById('uc').textContent = u; document.getElementById('nm').textContent = nm.toFixed(2);
-    document.getElementById('ri').innerHTML = pc >= 50 ? '<i class="fas fa-trophy" style="color:#fbbf24"></i>' : '<i class="fas fa-times-circle" style="color:#f5576c"></i>';
-    document.getElementById('rt').textContent = pc >= 50 ? "Quiz Completed!" : "Try Again!";
+    document.getElementById('rs').textContent = `${c}/${qd.q.length}`;
+    document.getElementById('cc').textContent = c; document.getElementById('ic').textContent = ic;
+    document.getElementById('uc').textContent = u; document.getElementById('nm').textContent = (ic * qd.nm).toFixed(2);
 }
-
-function ra() { document.getElementById('resultsContainer').style.display='none'; document.getElementById('quizContainer').style.display=(window.innerWidth >= 1024) ? 'grid' : 'block'; rq(0); }
+document.getElementById('rb').onclick = () => {
+    document.getElementById('resultsContainer').style.display = 'none';
+    document.getElementById('quizContainer').style.display = (window.innerWidth >= 1024) ? 'grid' : 'block';
+    rq(0);
+};
 </script>
 </body>
 </html>
