@@ -242,8 +242,15 @@
             <span style="font-size: 0.65rem; font-weight: 700; color: #fff; margin-top: 4px;">MOCKS</span>
         </div>
     </nav>
+<script>
+        // --- NEW: BACK BUTTON HANDLING ---
+        // This listener waits for the user to press the Android/Browser Back Button
+        window.onpopstate = function(event) {
+            // If the user hits back, we force the app to go to the home menu 
+            // instead of closing the app.
+            goHome(true); 
+        };
 
-    <script>
         function filterChapters() {
             let input = document.getElementById('chapterSearch').value.toLowerCase();
             let homeMenu = document.getElementById('home-menu');
@@ -254,6 +261,12 @@
                 document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
                 chapterMenu.style.display = 'flex';
                 document.getElementById('controls').style.display = 'block';
+                
+                // Add a history state so the first 'back' click clears search
+                if(history.state !== "searching") {
+                    history.pushState("searching", null, null);
+                }
+
                 allChapters.forEach(item => {
                     let text = item.textContent.toLowerCase();
                     if (text.includes(input)) {
@@ -270,6 +283,10 @@
             document.getElementById(id).style.display = 'flex';
             document.getElementById('controls').style.display = 'block';
             window.scrollTo(0,0);
+
+            // --- NEW: Tell the phone we moved forward ---
+            // This prevents the app from closing on the first back-press
+            history.pushState({ section: id }, null, null);
         }
 
         function openChapters(subject) {
@@ -282,61 +299,24 @@
             }
         }
 
-        function goHome() {
+        function goHome(fromBackButton = false) {
             document.getElementById('chapterSearch').value = "";
             document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
             document.getElementById('home-menu').style.display = 'grid';
             document.getElementById('controls').style.display = 'none';
+
+            // If we didn't get here via the back button, clear the history state manually
+            if(!fromBackButton && history.state !== null) {
+                history.back();
+            }
         }
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log("Service Worker Registered"))
-      .catch(err => console.log("Service Worker Failed", err));
-  }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+              .then(() => console.log("Service Worker Registered"))
+              .catch(err => console.log("Service Worker Failed", err));
+        }
     </script>
-    
-    <button id="subscribe-btn" style="margin:20px; padding:12px; background:#2196F3; color:white; border:none; border-radius:8px;">
-  🔔 Subscribe to Exam Alerts
-</button>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-  import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyD45MzRXxn6PTn5yszQi_xlc0kO-FukHoI",
-    authDomain: "rx-aspirant.firebaseapp.com",
-    projectId: "rx-aspirant",
-    storageBucket: "rx-aspirant.firebasestorage.app",
-    messagingSenderId: "1007411370077",
-    appId: "1:1007411370077:web:da559e45fd2a6a032b15b4"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const messaging = getMessaging(app);
-
-  const btn = document.getElementById('subscribe-btn');
-
-  btn.addEventListener('click', async () => {
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-      try {
-        const token = await getToken(messaging, { 
-          vapidKey: 'BHUbiTR9I6DtPlyPWsSSh-WQbNRee1JmaxHqkcli8VDySPLtoGQkIYVu1f976nnuboqy5KtjOOTkuaUWItALlhQ' 
-        });
-        if (token) {
-          console.log("Device Token:", token);
-          alert("Subscribed successfully!");
-          // In a real app, you would save this 'token' to a database here
-        }
-      } catch (err) {
-        console.error("Token error:", err);
-      }
-    } else {
-      alert("Please allow notifications to receive alerts.");
-    }
-  });
 </script>
 </body>
 </html>
