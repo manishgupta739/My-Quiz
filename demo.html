@@ -457,24 +457,7 @@ body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 </div>
 </div>
 <script>
-const qd = {
-    q: [
-        {
-            id: 0,
-            txt: "Which of the following is a loop diuretic?",
-            ref: "Reference: K.D. Tripathi, Page 602",
-            opts: ["Furosemide", "Hydrochlorothiazide", "Spironolactone", "Mannitol"],
-            ci: 0, // Correct Index (0 = First Option)
-            exp: "Furosemide is a prototype loop diuretic that inhibits Na+-K+-2Cl- symporter."
-        },
-        {
-            id: 1,
-            txt: "What is the primary use of Titanium Dioxide?",
-            ref: "",
-            opts: ["Glidant", "Opacifier", "Lubricant", "Disintegrant"],
-            ci: 1,
-            exp: "Titanium Dioxide is used as an opacifying agent in capsule manufacturing."
-        }
+const qd={q:[{id:0,txt:"Which of the following is used as an opacifying agent in capsule shells?",ref:"",opts:["Methyl paraben", "Sorbitol", "Titanium dioxide", "Gelatin"],ci:2,exp:"Titanium dioxide is added to capsule shells to make them opaque, protecting photosensitive drugs from light degradation."}
 st={cq:0,a:Array(qd.q.length).fill(null),mk:Array(qd.q.length).fill(false),tr:qd.tt,ti:null,sb:false,rv:false,th:'light'};
 document.addEventListener('DOMContentLoaded',()=>{sms();pcc();lt()});
 function lt(){const t=localStorage.getItem('qt')||'light';st.th=t;document.documentElement.setAttribute('data-theme',t);uti()}
