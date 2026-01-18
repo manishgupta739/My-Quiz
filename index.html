@@ -243,80 +243,96 @@
         </div>
     </nav>
 <script>
-        // --- NEW: BACK BUTTON HANDLING ---
-        // This listener waits for the user to press the Android/Browser Back Button
-        window.onpopstate = function(event) {
-            // If the user hits back, we force the app to go to the home menu 
-            // instead of closing the app.
-            goHome(true); 
-        };
+    // This "State" variable helps us track where we are
+    let currentView = 'home';
 
-        function filterChapters() {
-            let input = document.getElementById('chapterSearch').value.toLowerCase();
-            let homeMenu = document.getElementById('home-menu');
-            let chapterMenu = document.getElementById('chapter-menu');
-            let allChapters = document.querySelectorAll('.ch-group .list-item');
-            if (input.length > 0) {
-                homeMenu.style.display = 'none';
-                document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-                chapterMenu.style.display = 'flex';
-                document.getElementById('controls').style.display = 'block';
-                
-                // Add a history state so the first 'back' click clears search
-                if(history.state !== "searching") {
-                    history.pushState("searching", null, null);
-                }
-
-                allChapters.forEach(item => {
-                    let text = item.textContent.toLowerCase();
-                    if (text.includes(input)) {
-                        item.parentElement.style.display = 'block';
-                        item.style.display = 'flex';
-                    } else { item.style.display = 'none'; }
-                });
-            } else { goHome(); }
+    window.onpopstate = function(event) {
+        if (currentView === 'chapter-menu') {
+            // If we are in chapters, go back to subjects
+            openSectionDirectly('subject-menu');
+        } else if (currentView === 'subject-menu' || currentView === 'mock-menu' || currentView === 'pyp-menu') {
+            // If we are in a main category, go back to home
+            openSectionDirectly('home-menu');
         }
+    };
 
-        function showSection(id) {
-            document.getElementById('home-menu').style.display = 'none';
-            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
-            document.getElementById(id).style.display = 'flex';
-            document.getElementById('controls').style.display = 'block';
-            window.scrollTo(0,0);
+    function showSection(id) {
+        // Standard navigation: Push a state so the back button works
+        history.pushState({ section: id }, null, null);
+        openSectionDirectly(id);
+    }
 
-            // --- NEW: Tell the phone we moved forward ---
-            // This prevents the app from closing on the first back-press
-            history.pushState({ section: id }, null, null);
-        }
-
-        function openChapters(subject) {
-            showSection('chapter-menu');
-            document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
-            const group = document.getElementById(subject + '-list');
-            if(group) {
-                group.style.display = 'block';
-                group.querySelectorAll('.list-item').forEach(i => i.style.display = 'flex');
-            }
-        }
-
-        function goHome(fromBackButton = false) {
-            document.getElementById('chapterSearch').value = "";
-            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+    // This helper function just changes the visibility without adding history
+    function openSectionDirectly(id) {
+        currentView = id;
+        
+        // Hide everything
+        document.getElementById('home-menu').style.display = 'none';
+        document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+        document.getElementById('controls').style.display = (id === 'home-menu') ? 'none' : 'block';
+        
+        // Show the one we want
+        if (id === 'home-menu') {
             document.getElementById('home-menu').style.display = 'grid';
-            document.getElementById('controls').style.display = 'none';
-
-            // If we didn't get here via the back button, clear the history state manually
-            if(!fromBackButton && history.state !== null) {
-                history.back();
-            }
+            document.getElementById('chapterSearch').value = "";
+        } else {
+            document.getElementById(id).style.display = 'flex';
         }
+        window.scrollTo(0,0);
+    }
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-              .then(() => console.log("Service Worker Registered"))
-              .catch(err => console.log("Service Worker Failed", err));
+    function openChapters(subject) {
+        // Push state for the chapter menu level
+        history.pushState({ section: 'chapter-menu', subject: subject }, null, null);
+        currentView = 'chapter-menu';
+
+        document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+        document.getElementById('chapter-menu').style.display = 'flex';
+        
+        document.querySelectorAll('.ch-group').forEach(g => g.style.display = 'none');
+        const group = document.getElementById(subject + '-list');
+        if(group) {
+            group.style.display = 'block';
+            group.querySelectorAll('.list-item').forEach(i => i.style.display = 'flex');
         }
-    </script>
+    }
+
+    function goHome() {
+        // Manual button click: go back in history until we hit home
+        if (currentView !== 'home') {
+            history.back(); 
+        }
+    }
+
+    function filterChapters() {
+        let input = document.getElementById('chapterSearch').value.toLowerCase();
+        let homeMenu = document.getElementById('home-menu');
+        let chapterMenu = document.getElementById('chapter-menu');
+        let allChapters = document.querySelectorAll('.ch-group .list-item');
+        
+        if (input.length > 0) {
+            homeMenu.style.display = 'none';
+            document.querySelectorAll('.sub-menu').forEach(m => m.style.display = 'none');
+            chapterMenu.style.display = 'flex';
+            document.getElementById('controls').style.display = 'block';
+            
+            allChapters.forEach(item => {
+                let text = item.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    item.parentElement.style.display = 'block';
+                    item.style.display = 'flex';
+                } else { item.style.display = 'none'; }
+            });
+        } else if (currentView === 'home') {
+            goHome();
+        }
+    }
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log("Service Worker Registered"))
+          .catch(err => console.log("Service Worker Failed", err));
+    }
 </script>
 </body>
 </html>
